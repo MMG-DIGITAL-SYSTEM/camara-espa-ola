@@ -1,5 +1,7 @@
+import type { AjustesDelSitio } from '@/types/ajustes';
 import type { Auth } from '@/types/auth';
-import type { Team } from '@/types/teams';
+import type { MenusDelSitio } from '@/types/menu';
+import type { FlashToast } from '@/types/ui';
 
 declare module 'react' {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -14,9 +16,14 @@ declare module '@inertiajs/core' {
             name: string;
             auth: Auth;
             sidebarOpen: boolean;
-            currentTeam: Team | null;
-            teams: Team[];
+            /** La página va incrustada en el editor visual. */
+            soloContenido: boolean;
+            menus: MenusDelSitio;
+            ajustes: AjustesDelSitio;
             [key: string]: unknown;
+        };
+        flashDataType: {
+            toast?: FlashToast;
         };
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Ajuste;
+use App\Models\MenuItem;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -40,12 +42,37 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'name' => config('app.name'),
+            /*
+             * El editor visual incrusta la página pública de un módulo para
+             * enseñar su contenido propio: sin menú, pie ni secciones
+             * editables, que el editor ya pinta por su cuenta.
+             */
+            'soloContenido' => $request->boolean('solo_contenido')
+                && ($user?->accedeAlPanel() ?? false),
             'auth' => [
-                'user' => $user,
+                'user' => $user ? [
+                    ...$user->only('id', 'name', 'email', 'email_verified_at', 'activo'),
+                    'rol' => $user->rol?->nombre,
+                    'es_admin' => $user->esAdmin(),
+                    'accede_al_panel' => $user->accedeAlPanel(),
+                    'accede_al_portal_de_empresas' => $user->accedeAlPortalDeEmpresas(),
+                    'empresa' => $user->socio_id ? $user->socio?->nombre : null,
+                ] : null,
             ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
-            'currentTeam' => fn () => $user?->currentTeam ? $user->toUserTeam($user->currentTeam) : null,
-            'teams' => fn () => $user?->toUserTeams(includeCurrent: true) ?? [],
+
+            /*
+             * Menús del sitio público. Van como closure para que solo se
+             * consulten cuando la vista los pide, y el panel no pague dos
+             * consultas por pantalla.
+             */
+            'menus' => fn () => [
+                'principal' => MenuItem::arbol(MenuItem::PRINCIPAL),
+                'pie' => MenuItem::arbol(MenuItem::PIE),
+            ],
+
+            // Datos de contacto y redes, cacheados en el propio modelo.
+            'ajustes' => fn () => Ajuste::todos(),
         ];
     }
 }

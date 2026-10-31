@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Enums\TeamRole;
-use App\Models\Team;
+use App\Enums\Rol as RolEnum;
+use App\Models\Rol;
+use App\Models\Socio;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -31,6 +32,8 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'activo' => true,
+            'rol_id' => fn (): int => $this->idDeRol(RolEnum::Usuario),
             'remember_token' => Str::random(10),
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
@@ -39,21 +42,44 @@ class UserFactory extends Factory
     }
 
     /**
-     * Configure the model factory.
+     * Usuario con rol Administrador: acceso completo al panel.
      */
-    public function configure(): static
+    public function admin(): static
     {
-        return $this->afterCreating(function ($user) {
-            $team = Team::factory()->personal()->create([
-                'name' => $user->name."'s Team",
-            ]);
+        return $this->state(fn (): array => [
+            'rol_id' => $this->idDeRol(RolEnum::Administrador),
+        ]);
+    }
 
-            $team->members()->attach($user, [
-                'role' => TeamRole::Owner->value,
-            ]);
+    /**
+     * Usuario con rol Editor: acceso al panel, sin gestión de usuarios.
+     */
+    public function editor(): static
+    {
+        return $this->state(fn (): array => [
+            'rol_id' => $this->idDeRol(RolEnum::Editor),
+        ]);
+    }
 
-            $user->switchTeam($team);
-        });
+    /**
+     * Cuenta de empresa: entra al portal de empresas en nombre de su socio.
+     */
+    public function empresa(?Socio $socio = null): static
+    {
+        return $this->state(fn (): array => [
+            'rol_id' => $this->idDeRol(RolEnum::Empresa),
+            'socio_id' => $socio?->id ?? OfertaEmpleoFactory::socioActivo()->id,
+        ]);
+    }
+
+    /**
+     * Cuenta desactivada: no puede entrar al panel aunque tenga rol.
+     */
+    public function desactivado(): static
+    {
+        return $this->state(fn (): array => [
+            'activo' => false,
+        ]);
     }
 
     /**
@@ -76,5 +102,16 @@ class UserFactory extends Factory
             'two_factor_recovery_codes' => encrypt(json_encode(['recovery-code-1'])),
             'two_factor_confirmed_at' => now(),
         ]);
+    }
+
+    /**
+     * Resuelve el id del rol, creándolo si el seeder aún no corrió.
+     */
+    private function idDeRol(RolEnum $rol): int
+    {
+        return Rol::firstOrCreate(
+            ['nombre' => $rol->value],
+            ['descripcion' => $rol->descripcion()],
+        )->id;
     }
 }

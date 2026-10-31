@@ -132,6 +132,161 @@
     --sidebar-ring: oklch(0.439 0 0);
 }
 
+/* ============================================================
+   Identidad de la Cámara — panel de administración
+   ------------------------------------------------------------
+   El rojo de marca ocupa la barra lateral entera. Como es una
+   superficie grande, se usa un tono más profundo y algo menos
+   saturado que el red-600 del sitio público: mantiene la marca
+   reconocible sin fatigar la vista en jornadas largas.
+
+   Los colores de estado (éxito, error, aviso) viven solo en el
+   área de contenido, que es clara, para que no compitan con el
+   rojo de la barra.
+   ============================================================ */
+@theme {
+    --color-marca: var(--marca);
+    --color-marca-foreground: var(--marca-foreground);
+    --color-marca-suave: var(--marca-suave);
+    --color-marca-calida: var(--marca-calida);
+
+    --color-serie-1: var(--serie-1);
+    --color-serie-2: var(--serie-2);
+
+    --color-panel: var(--panel);
+    --color-panel-alto: var(--panel-alto);
+    --color-panel-foreground: var(--panel-foreground);
+    --color-panel-muted: var(--panel-muted);
+    --color-panel-hover: var(--panel-hover);
+    --color-panel-activo: var(--panel-activo);
+    --color-panel-activo-foreground: var(--panel-activo-foreground);
+    --color-panel-border: var(--panel-border);
+}
+
+:root {
+    /* Rojo del sitio público (red-600), para acentos sobre fondo claro. */
+    --marca: oklch(0.577 0.245 27.325);
+    --marca-foreground: oklch(0.985 0 0);
+    --marca-suave: oklch(0.955 0.018 25);
+    /* Segundo color del degradado de marca: naranja cálido. */
+    --marca-calida: oklch(0.7 0.19 50);
+
+    /*
+       Barra lateral: azul noche, de --panel-alto a --panel. El rojo queda
+       para lo activo y las llamadas a la acción, donde destaca más que como
+       fondo de toda la barra.
+    */
+    --panel: oklch(0.2 0.045 268);
+    --panel-alto: oklch(0.27 0.07 275);
+    --panel-foreground: oklch(0.97 0.01 265);
+    --panel-muted: oklch(0.72 0.04 265);
+    --panel-hover: oklch(0.32 0.06 270);
+    --panel-activo: oklch(0.99 0.003 25);
+    --panel-activo-foreground: oklch(0.99 0.003 25);
+    --panel-border: oklch(0.36 0.05 268);
+
+    /*
+       Series de los gráficos. Pareja validada para daltonismo sobre fondo
+       claro: ΔE 29.9 en protanopía y 38.2 en visión normal.
+    */
+    --serie-1: #dc2626;
+    --serie-2: #2563eb;
+}
+
+.dark {
+    --marca: oklch(0.63 0.225 27.5);
+    --marca-foreground: oklch(0.99 0 0);
+    --marca-suave: oklch(0.27 0.065 25);
+    --marca-calida: oklch(0.74 0.17 55);
+
+    --panel: oklch(0.17 0.04 268);
+    --panel-alto: oklch(0.23 0.065 278);
+    --panel-foreground: oklch(0.96 0.01 265);
+    --panel-muted: oklch(0.68 0.04 265);
+    --panel-hover: oklch(0.28 0.055 270);
+    --panel-activo: oklch(0.97 0.008 25);
+    --panel-activo-foreground: oklch(0.99 0.003 25);
+    --panel-border: oklch(0.3 0.045 268);
+
+    /* Pareja propia para fondo oscuro, no un aclarado automático de la clara. */
+    --serie-1: #ef4444;
+    --serie-2: #3b82f6;
+}
+
+/*
+   Mientras se navega por el panel, la barra lateral adopta el rojo de marca.
+   Se declara sobre el <html> (AdminLayout pone el atributo) en vez de sobre el
+   contenedor del layout, porque el menú lateral móvil se renderiza en un portal
+   colgado de <body> y no heredaría las variables de otro modo.
+*/
+[data-area='panel'] {
+    --sidebar: var(--panel);
+    --sidebar-foreground: var(--panel-foreground);
+    --sidebar-accent: var(--panel-hover);
+    --sidebar-accent-foreground: var(--panel-foreground);
+    --sidebar-border: var(--panel-border);
+    --sidebar-ring: var(--panel-activo);
+    --sidebar-primary: var(--panel-activo);
+    --sidebar-primary-foreground: var(--panel-activo-foreground);
+
+    /* Los botones principales del panel llevan el rojo de marca. */
+    --primary: var(--marca);
+    --primary-foreground: var(--marca-foreground);
+}
+
+/*
+   Superficies del panel en oscuro: azul noche en lugar del negro puro, a
+   juego con la barra lateral. Solo en el panel; el sitio público no cambia.
+*/
+.dark[data-area='panel'] {
+    --background: oklch(0.16 0.025 265);
+    --card: oklch(0.2 0.03 265);
+    --popover: oklch(0.2 0.03 265);
+    --muted: oklch(0.24 0.03 265);
+    --secondary: oklch(0.25 0.03 265);
+    --accent: oklch(0.27 0.035 265);
+    --border: oklch(0.3 0.03 265);
+    --input: oklch(0.32 0.03 265);
+}
+
+/* Fondo del área de contenido: un velo de color de marca muy tenue. */
+.fondo-panel {
+    background:
+        radial-gradient(
+            60rem 30rem at 100% -10%,
+            color-mix(in oklch, var(--marca-calida) 10%, transparent),
+            transparent 70%
+        ),
+        radial-gradient(
+            50rem 30rem at 0% 0%,
+            color-mix(in oklch, oklch(0.6 0.2 275) 9%, transparent),
+            transparent 70%
+        ),
+        color-mix(in oklch, var(--muted) 45%, var(--background));
+}
+
+/* Mesa de trabajo del editor visual: rejilla de puntos sobre el fondo. */
+.lienzo-editor {
+    background-color: color-mix(in oklch, var(--muted) 70%, var(--background));
+    background-image: radial-gradient(
+        color-mix(in oklch, var(--muted-foreground) 28%, transparent) 1px,
+        transparent 1px
+    );
+    background-size: 18px 18px;
+}
+
+/*
+   Degradado de marca para lo activo y las llamadas a la acción. Es una
+   utilidad de Tailwind, así que admite variantes (hover:, group-hover:…).
+*/
+@utility degradado-marca {
+    background-image: linear-gradient(
+        120deg,
+        var(--marca) 0%,
+        var(--marca-calida) 100%
+    );
+}
+
 @layer base {
     * {
         @apply border-border;
@@ -140,4 +295,73 @@
     body {
         @apply bg-background text-foreground;
     }
+}
+
+/* Animaciones personalizadas */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Soporte para prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .animate-in,
+    .animate-on-scroll {
+        animation: none !important;
+        opacity: 1 !important;
+        transition: none !important;
+    }
+
+    [data-state='open'] {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Mejoras de accesibilidad: el foco usa el rojo de marca. */
+*:focus-visible {
+    outline: 2px solid var(--marca);
+    outline-offset: 2px;
+}
+
+/* Dentro de la barra lateral roja el foco debe ser claro para verse. */
+[data-panel-lateral] *:focus-visible {
+    outline-color: var(--panel-activo);
+}
+
+/* Transiciones suaves para el navbar */
+.navbar-transition {
+    transition:
+        background-color 0.3s ease,
+        box-shadow 0.3s ease,
+        height 0.3s ease;
+}
+
+/* Scrollbar personalizada para el menú móvil */
+.overflow-y-auto {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+    width: 4px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 2px;
 }

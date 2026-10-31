@@ -1,38 +1,13 @@
 <?php
 
-use App\Enums\TeamRole;
-use App\Models\Team;
-use App\Models\TeamInvitation;
 use App\Models\User;
 use Illuminate\Support\Facades\RateLimiter;
-use Inertia\Testing\AssertableInertia as Assert;
 use Laravel\Fortify\Features;
 
 test('login screen can be rendered', function () {
     $response = $this->get(route('login'));
 
     $response->assertOk();
-});
-
-test('login screen includes team invitation context', function () {
-    $owner = User::factory()->create();
-    $team = Team::factory()->create(['name' => 'Laravel Team']);
-    $team->members()->attach($owner, ['role' => TeamRole::Owner->value]);
-
-    $invitation = TeamInvitation::factory()->create([
-        'team_id' => $team->id,
-        'email' => 'invited@example.com',
-        'invited_by' => $owner->id,
-    ]);
-
-    $response = $this->get(route('login', ['invitation' => $invitation->code]));
-
-    $response->assertOk();
-    $response->assertInertia(fn (Assert $page) => $page
-        ->component('auth/login')
-        ->where('teamInvitation.code', $invitation->code)
-        ->where('teamInvitation.teamName', 'Laravel Team'),
-    );
 });
 
 test('users can authenticate using the login screen', function () {
@@ -44,7 +19,39 @@ test('users can authenticate using the login screen', function () {
     ]);
 
     $this->assertAuthenticated();
-    $response->assertRedirect(route('dashboard'));
+    $response->assertRedirect(route('home'));
+});
+
+test('un administrador aterriza en el panel tras iniciar sesión', function () {
+    $admin = User::factory()->admin()->create();
+
+    $response = $this->post(route('login.store'), [
+        'email' => $admin->email,
+        'password' => 'password',
+    ]);
+
+    $this->assertAuthenticated();
+    $response->assertRedirect(route('admin.dashboard'));
+});
+
+test('una cuenta de empresa aterriza en su portal tras iniciar sesión', function () {
+    $empresa = User::factory()->empresa()->create();
+
+    $this->post(route('login.store'), [
+        'email' => $empresa->email,
+        'password' => 'password',
+    ])->assertRedirect(route('empresa.ofertas.index'));
+});
+
+test('un usuario sin acceso al panel aterriza en el sitio público', function () {
+    $usuario = User::factory()->create();
+
+    $response = $this->post(route('login.store'), [
+        'email' => $usuario->email,
+        'password' => 'password',
+    ]);
+
+    $response->assertRedirect(route('home'));
 });
 
 test('users with two factor enabled are redirected to two factor challenge', function () {

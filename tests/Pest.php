@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\RolSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,8 +15,10 @@ use Tests\TestCase;
 |
 */
 
+// Los roles son datos de referencia que la aplicación asume siempre presentes.
 pest()->extend(TestCase::class)
     ->use(RefreshDatabase::class)
+    ->beforeEach(fn () => $this->seed(RolSeeder::class))
     ->in('Feature');
 
 /*

@@ -23,6 +23,12 @@ export default function Profile({
     status?: string;
 }) {
     const { auth } = usePage<PageProps>().props;
+    const usuario = auth.user;
+
+    // La ruta exige autenticación, así que aquí siempre hay usuario.
+    if (!usuario) {
+        return null;
+    }
 
     return (
         <>
@@ -52,7 +58,7 @@ export default function Profile({
                                 <Input
                                     id="name"
                                     className="mt-1 block w-full"
-                                    defaultValue={auth.user.name}
+                                    defaultValue={usuario.name}
                                     name="name"
                                     required
                                     autoComplete="name"
@@ -72,7 +78,7 @@ export default function Profile({
                                     id="email"
                                     type="email"
                                     className="mt-1 block w-full"
-                                    defaultValue={auth.user.email}
+                                    defaultValue={usuario.email}
                                     name="email"
                                     required
                                     autoComplete="username"
@@ -86,7 +92,7 @@ export default function Profile({
                             </div>
 
                             {mustVerifyEmail &&
-                                auth.user.email_verified_at === null && (
+                                usuario.email_verified_at === null && (
                                     <div>
                                         <p className="-mt-4 text-sm text-muted-foreground">
                                             Your email address is unverified.{' '}

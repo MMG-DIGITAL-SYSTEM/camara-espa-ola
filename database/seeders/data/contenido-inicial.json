@@ -1,0 +1,986 @@
+{
+    "categorias_afiliados": [
+        {
+            "id": 1,
+            "nombre": "ESTUDIO DE ABOGADOS"
+        }
+    ],
+    "estados_comercial": [
+        {
+            "id": 1,
+            "nombre": "Activo"
+        }
+    ],
+    "estados_publicacion": [
+        {
+            "id": 1,
+            "nombre": "Publicada"
+        },
+        {
+            "id": 2,
+            "nombre": "Borrador"
+        },
+        {
+            "id": 3,
+            "nombre": "Pendiente a revisión"
+        },
+        {
+            "id": 4,
+            "nombre": "Archivada"
+        },
+        {
+            "id": 5,
+            "nombre": "publicado"
+        }
+    ],
+    "visibilidad": [
+        {
+            "id": 1,
+            "nombre": "Pública"
+        },
+        {
+            "id": 2,
+            "nombre": "Privada"
+        },
+        {
+            "id": 3,
+            "nombre": "Solo afiliados"
+        },
+        {
+            "id": 4,
+            "nombre": "público"
+        }
+    ],
+    "categorias": [
+        {
+            "id": 1,
+            "nombre": "Sin categoria",
+            "created_at": null,
+            "updated_at": null
+        },
+        {
+            "id": 2,
+            "nombre": "destacada",
+            "created_at": null,
+            "updated_at": null
+        },
+        {
+            "id": 3,
+            "nombre": "noticia",
+            "created_at": null,
+            "updated_at": null
+        },
+        {
+            "id": 4,
+            "nombre": "eventos",
+            "created_at": null,
+            "updated_at": null
+        },
+        {
+            "id": 5,
+            "nombre": "Actividades",
+            "created_at": null,
+            "updated_at": null
+        },
+        {
+            "id": 6,
+            "nombre": "proximo",
+            "created_at": null,
+            "updated_at": null
+        }
+    ],
+    "contenido_institucional": [
+        {
+            "id": 1,
+            "seccion": "nuestra_organizacion",
+            "titulo": "Nuestra Organización",
+            "contenido": "La Cámara Oficial Española es una asociación civil sin fines de lucro reconocida oficialmente por el Estado Español y creada con el fin de fortalecer el desarrollo de las relaciones económicas y empresariales entre España y Bolivia, fomentando las inversiones y el intercambio comercial entre ambos países.\n\n    Actualmente, hemos creado alianzas con más de 96 empresas asociadas y una red de contactos que permiten que tanto para Bolivia y España se creen espacios propicios para el intercambio comercial y económico.",
+            "imagen": null,
+            "orden": 1,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:37",
+            "updated_at": "2026-08-28 17:27:37",
+            "deleted_at": null,
+            "pdf": null
+        },
+        {
+            "id": 2,
+            "seccion": "nosotros",
+            "titulo": "Nosotros",
+            "contenido": "La Cámara Española es una asociación civil sin fines de lucro reconocida oficialmente por el Estado Español y creada con el fin de fortalecer el desarrollo de las relaciones económicas y empresariales entre España y Bolivia, fomentando las inversiones y el intercambio comercial entre ambos países. Actualmente, hemos creado alianzas con más de 96 empresas asociadas y una red de contactos que permiten que tanto para Bolivia y para España se creen espacios propicios para el intercambio comercial y económico.",
+            "imagen": null,
+            "orden": 2,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:37",
+            "updated_at": "2026-08-28 17:27:37",
+            "deleted_at": null,
+            "pdf": null
+        },
+        {
+            "id": 3,
+            "seccion": "mision",
+            "titulo": "Misión",
+            "contenido": "Nuestra MISIÓN es potenciar el desarrollo comercial de empresas españolas y bolivianas, fomentando la relación entre nuestros asociados y poniendo en valor el aporte que realizan para el desarrollo y el progreso de Bolivia.",
+            "imagen": null,
+            "orden": 3,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:37",
+            "updated_at": "2026-08-28 17:27:37",
+            "deleted_at": null,
+            "pdf": null
+        },
+        {
+            "id": 4,
+            "seccion": "vision",
+            "titulo": "Visión",
+            "contenido": "Nuestra VISIÓN es constituirnos en un referente como institución promotora de las relaciones comerciales entre Bolivia y España; y en el portavoz del interés social de la inversión española en el país.",
+            "imagen": null,
+            "orden": 4,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:37",
+            "updated_at": "2026-08-28 17:27:37",
+            "deleted_at": null,
+            "pdf": null
+        },
+        {
+            "id": 5,
+            "seccion": "estatutos",
+            "titulo": "Estatutos",
+            "contenido": "Para conocer los Estatutos de la Cámara Española, da click en Descargar",
+            "imagen": null,
+            "orden": 5,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:37",
+            "updated_at": "2026-08-28 17:27:37",
+            "deleted_at": null,
+            "pdf": null
+        }
+    ],
+    "directivos": [
+        {
+            "id": 1,
+            "nombre": "Fernando García Casas",
+            "cargo": "Embajador de España en Bolivia",
+            "empresa": null,
+            "imagen": null,
+            "orden": 1,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "nombre": "Ildefonso Núñez López",
+            "cargo": "Presidente",
+            "empresa": "I MAGINA SRL.",
+            "imagen": null,
+            "orden": 2,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 3,
+            "nombre": "Beatriz Gallardo Gens",
+            "cargo": "Agregada Comercial Jefe de la Embajada de España",
+            "empresa": null,
+            "imagen": null,
+            "orden": 3,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 4,
+            "nombre": "Mauricio Mariaca",
+            "cargo": "Vice Presidente",
+            "empresa": "REPSOL E&P BOLIVIA S.A",
+            "imagen": null,
+            "orden": 4,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 5,
+            "nombre": "Yolanda Bueno",
+            "cargo": "Directora",
+            "empresa": "OB MALLAS S.R.L.",
+            "imagen": null,
+            "orden": 5,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 6,
+            "nombre": "Félix Rodríguez",
+            "cargo": "Director",
+            "empresa": "TELEFERICOS DOPPELMAYR BOLIVIA S.A.",
+            "imagen": null,
+            "orden": 6,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 7,
+            "nombre": "Jorge Luis Valencia",
+            "cargo": "Director",
+            "empresa": "MAXAM FANEXA S.A.M.",
+            "imagen": null,
+            "orden": 7,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 8,
+            "nombre": "Amaury Mosquera Córdoba",
+            "cargo": "Director",
+            "empresa": "AIR EUROPA BOLIVIA",
+            "imagen": null,
+            "orden": 8,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 9,
+            "nombre": "Mauricio Saldaña F.",
+            "cargo": "Director",
+            "empresa": "ONTIER ABOGADOS",
+            "imagen": null,
+            "orden": 9,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 10,
+            "nombre": "Pablo Ordoñez",
+            "cargo": "Director",
+            "empresa": "PPO ABOGADOS",
+            "imagen": null,
+            "orden": 10,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 11,
+            "nombre": "Carola Ossio Bustillos",
+            "cargo": "Directora",
+            "empresa": "SANTILLANA DE EDICIONES S.A.",
+            "imagen": null,
+            "orden": 11,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 12,
+            "nombre": "Walker San Miguel",
+            "cargo": "Director",
+            "empresa": "SAN MIGUEL ABOGADOS S.C.",
+            "imagen": null,
+            "orden": 12,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 13,
+            "nombre": "Raul X. Ascarrunz",
+            "cargo": "Director",
+            "empresa": "ELITE BRANDS S.R.L.",
+            "imagen": null,
+            "orden": 13,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 14,
+            "nombre": "Eduardo Santa Cruz M.",
+            "cargo": "Director",
+            "empresa": "HESPERIA INGENIERIA Y SERVICIOS S.R.L.",
+            "imagen": null,
+            "orden": 14,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 15,
+            "nombre": "Ignacio Justiniano Ponce",
+            "cargo": "Director",
+            "empresa": "CONECTA REDES Y SERVICIOS S.A.",
+            "imagen": null,
+            "orden": 15,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 16,
+            "nombre": "Angela Aspiazu Cuellar",
+            "cargo": "Director",
+            "empresa": "BONEL NEXOS COMERCIALES S.R.L.",
+            "imagen": null,
+            "orden": 16,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        },
+        {
+            "id": 17,
+            "nombre": "Nelson Quenta Mariño",
+            "cargo": "Secretario General",
+            "empresa": null,
+            "imagen": null,
+            "orden": 17,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-28 17:27:44",
+            "updated_at": "2026-08-28 17:27:44",
+            "deleted_at": null
+        }
+    ],
+    "servicios": [
+        {
+            "id": 1,
+            "titulo": "Calendario de citas",
+            "contenido": "Los asociados podrán solicitar una agenda de reuniones de hasta 4 citas con empresas e instituciones públicas que sean de su interés.",
+            "icono": null,
+            "imagen": null,
+            "orden": 1,
+            "activo": true,
+            "created_at": "2026-09-02 17:11:48",
+            "updated_at": "2026-09-02 17:11:48",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "titulo": "Base de datos",
+            "contenido": "Contamos con una base de datos de empresas locales y otras empresas de nuestra Red de Cámaras en el Extranjero.",
+            "icono": null,
+            "imagen": null,
+            "orden": 2,
+            "activo": true,
+            "created_at": "2026-09-02 17:11:48",
+            "updated_at": "2026-09-02 17:11:48",
+            "deleted_at": null
+        },
+        {
+            "id": 3,
+            "titulo": "Medio de comunicación",
+            "contenido": "Podrá utilizar el Newsletter para publicar noticias de su empresa.",
+            "icono": null,
+            "imagen": null,
+            "orden": 3,
+            "activo": true,
+            "created_at": "2026-09-02 17:11:48",
+            "updated_at": "2026-09-02 17:11:48",
+            "deleted_at": null
+        },
+        {
+            "id": 4,
+            "titulo": "Logo",
+            "contenido": "Nuestros socios podrán utilizar el Logo de la Cámara.",
+            "icono": null,
+            "imagen": "servicio1.jpg",
+            "orden": 4,
+            "activo": true,
+            "created_at": "2026-09-02 17:11:48",
+            "updated_at": "2026-09-02 17:11:48",
+            "deleted_at": null
+        },
+        {
+            "id": 5,
+            "titulo": "Ofertas laborales",
+            "contenido": "Podrá publicar ofertas laborales a través de nuestra web www.camara.com.bo",
+            "icono": null,
+            "imagen": null,
+            "orden": 5,
+            "activo": true,
+            "created_at": "2026-09-02 17:11:48",
+            "updated_at": "2026-09-02 17:11:48",
+            "deleted_at": null
+        },
+        {
+            "id": 6,
+            "titulo": "Ferias",
+            "contenido": "Anualmente, la Cámara Española en Bolivia participa en diferentes eventos feriales a los cuales pueden participar nuestros asociados accediendo a tarifas especiales.",
+            "icono": null,
+            "imagen": null,
+            "orden": 6,
+            "activo": true,
+            "created_at": "2026-09-02 17:11:48",
+            "updated_at": "2026-09-02 17:11:48",
+            "deleted_at": null
+        },
+        {
+            "id": 7,
+            "titulo": "Convenios",
+            "contenido": "Todos nuestros asociados podrán acceder a descuentos y promociones con las empresas a Instituciones con las que la Cámara ha firmado Acuerdos y Convenios, que serán publicados en el sitio web www.camara.com.bo en la sección \"Socios\" / \"Convenios\".",
+            "icono": null,
+            "imagen": null,
+            "orden": 7,
+            "activo": true,
+            "created_at": "2026-09-02 17:11:48",
+            "updated_at": "2026-09-02 17:11:48",
+            "deleted_at": null
+        },
+        {
+            "id": 8,
+            "titulo": "Logo CAMACOES",
+            "contenido": "Los socios de la Cámara pueden usar el logo de Camacoes en sus piezas gráficas para difundir la pertenencia al gremio (previa aprobación de uso de normas gráficas).",
+            "icono": null,
+            "imagen": null,
+            "orden": 8,
+            "activo": true,
+            "created_at": "2026-09-02 17:11:48",
+            "updated_at": "2026-09-02 17:11:48",
+            "deleted_at": null
+        }
+    ],
+    "noticias": [
+        {
+            "id": 4,
+            "titulo": "Primera Noticia de Prueba",
+            "descripcion": "Descripción de la noticia de prueba",
+            "extracto": "Extracto de la noticia",
+            "imagen": null,
+            "fecha_publicacion": "2026-09-07 00:19:18",
+            "fecha_evento": null,
+            "estado_id": 5,
+            "visibilidad_id": 4,
+            "destacada": true,
+            "publicado_por": null,
+            "updated_by": null,
+            "created_at": "2026-09-07 00:19:18",
+            "updated_at": "2026-09-07 00:19:18",
+            "deleted_at": null,
+            "slug": "primera-noticia-prueba"
+        },
+        {
+            "id": 1,
+            "titulo": "Nuevo convenio de colaboración con la Cámara de Comercio de Madrid",
+            "descripcion": "<p>La Cámara Oficial Española en Bolivia ha firmado un importante convenio de colaboración con la Cámara de Comercio de Madrid. Este acuerdo busca fortalecer los lazos comerciales entre Bolivia y España.</p><p>El convenio permitirá a las empresas bolivianas acceder a nuevos mercados en España, facilitando el intercambio comercial y la inversión.</p>",
+            "extracto": "La Cámara Oficial Española en Bolivia firma un convenio de colaboración con la Cámara de Comercio de Madrid.",
+            "imagen": null,
+            "fecha_publicacion": "2026-09-01 00:00:00",
+            "fecha_evento": null,
+            "estado_id": 5,
+            "visibilidad_id": 4,
+            "destacada": true,
+            "publicado_por": null,
+            "updated_by": null,
+            "created_at": "2026-09-06 19:49:47",
+            "updated_at": "2026-09-07 00:26:55",
+            "deleted_at": null,
+            "slug": "nuevo-convenio-colaboracion-camara-madrid"
+        },
+        {
+            "id": 2,
+            "titulo": "Éxito en la misión comercial \"Women Leader's 2026\"",
+            "descripcion": "<p>La misión comercial \"Women Leader's 2026\" fue un rotundo éxito. Empresarias bolivianas y españolas se reunieron para explorar oportunidades de negocio.</p><p>Durante el evento se establecieron alianzas estratégicas que fortalecerán el comercio entre ambos países.</p>",
+            "extracto": "La misión comercial \"Women Leader's 2026\" concluye con éxito y nuevas alianzas estratégicas.",
+            "imagen": null,
+            "fecha_publicacion": "2026-08-28 00:00:00",
+            "fecha_evento": null,
+            "estado_id": 5,
+            "visibilidad_id": 4,
+            "destacada": false,
+            "publicado_por": null,
+            "updated_by": null,
+            "created_at": "2026-09-06 19:49:47",
+            "updated_at": "2026-09-07 00:26:55",
+            "deleted_at": null,
+            "slug": "exito-mision-comercial-women-leaders-2026"
+        },
+        {
+            "id": 3,
+            "titulo": "Cámara Española participa en la Expo Bolivia 2026",
+            "descripcion": "<p>La Cámara Oficial Española en Bolivia participó activamente en la Expo Bolivia 2026, el evento empresarial más importante del país.</p><p>Durante la feria, se presentaron las oportunidades de inversión y comercio entre Bolivia y España.</p>",
+            "extracto": "La Cámara Española en Bolivia participa en la Expo Bolivia 2026.",
+            "imagen": null,
+            "fecha_publicacion": "2026-08-20 00:00:00",
+            "fecha_evento": null,
+            "estado_id": 5,
+            "visibilidad_id": 4,
+            "destacada": false,
+            "publicado_por": null,
+            "updated_by": null,
+            "created_at": "2026-09-06 19:49:47",
+            "updated_at": "2026-09-07 00:26:55",
+            "deleted_at": null,
+            "slug": "camara-espanola-participa-expo-bolivia-2026"
+        }
+    ],
+    "actividades": [
+        {
+            "id": 1,
+            "titulo": "PPO Indacochea presenta sus nuevas oficinas en Santa Cruz de la Sierra",
+            "descripcion": "<p>PPO Indacochea inaugura sus nuevas oficinas en el Edificio Manzana 40 en Santa Cruz de la Sierra. El evento contó con la presencia de autoridades locales y representantes del sector empresarial. Las nuevas instalaciones cuentan con tecnología de punta y espacios diseñados para brindar un mejor servicio a sus clientes.</p>",
+            "imagen": "pablo.jpeg",
+            "fecha_publicacion": "2026-08-24 00:00:00",
+            "fecha_evento": "2026-08-24 00:00:00",
+            "estado_id": 1,
+            "visibilidad_id": 1,
+            "publicado_por": null,
+            "autor_visible": "Cámara",
+            "updated_by": null,
+            "created_at": "2026-08-29 22:05:53",
+            "updated_at": "2026-08-29 22:05:53",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "titulo": "MISION COMERCIAL \"WOMEN LEADER'S 2026\" MADRID – ESPAÑA",
+            "descripcion": "<p>La Cámara Oficial Española invita a participar en la Misión Comercial \"Women Leader's 2026\" que se llevará a cabo en Madrid, España. Esta misión está diseñada para impulsar el liderazgo femenino en el ámbito empresarial. Las empresas interesadas pueden inscribirse hasta el 30 de mayo de 2026. Cupos limitados.</p>",
+            "imagen": "POST1-MIS-WOMANLEADERS.png.jpg",
+            "fecha_publicacion": "2026-06-16 00:00:00",
+            "fecha_evento": "2026-06-16 00:00:00",
+            "estado_id": 1,
+            "visibilidad_id": 1,
+            "publicado_por": null,
+            "autor_visible": "Cámara",
+            "updated_by": null,
+            "created_at": "2026-08-29 22:05:53",
+            "updated_at": "2026-08-29 22:05:53",
+            "deleted_at": null
+        },
+        {
+            "id": 3,
+            "titulo": "CONVENIO INTERINSTITUCIONAL CAMACOES BOLIVIA CON LA CAMEBOL FILIAL SANTA CRUZ",
+            "descripcion": "<p>Se firmó un convenio interinstitucional entre CAMACOES Bolivia y la CAMEBOL Filial Santa Cruz, con el objetivo de fortalecer el tejido empresarial de la región. El acuerdo contempla acciones conjuntas en materia de capacitación, promoción comercial y generación de alianzas estratégicas para el desarrollo económico local.</p>",
+            "imagen": null,
+            "fecha_publicacion": "2025-11-15 00:00:00",
+            "fecha_evento": "2025-11-15 00:00:00",
+            "estado_id": 1,
+            "visibilidad_id": 1,
+            "publicado_por": null,
+            "autor_visible": "Cámara",
+            "updated_by": null,
+            "created_at": "2026-08-29 22:05:53",
+            "updated_at": "2026-08-29 22:05:53",
+            "deleted_at": null
+        },
+        {
+            "id": 4,
+            "titulo": "FORO EMPRESARIAL IBEROAMERICANO – ASAMBLEA AICO",
+            "descripcion": "<p>La Cámara Oficial Española participó en el Foro Empresarial Iberoamericano organizado por la Asamblea AICO, donde se abordaron temas clave para la integración comercial entre países iberoamericanos. Durante el evento, se destacó el rol de Bolivia como puente comercial entre el Cono Sur y el resto de la región.</p>",
+            "imagen": null,
+            "fecha_publicacion": "2025-08-01 00:00:00",
+            "fecha_evento": "2025-08-01 00:00:00",
+            "estado_id": 1,
+            "visibilidad_id": 1,
+            "publicado_por": null,
+            "autor_visible": "Cámara",
+            "updated_by": null,
+            "created_at": "2026-08-29 22:05:53",
+            "updated_at": "2026-08-29 22:05:53",
+            "deleted_at": null
+        },
+        {
+            "id": 5,
+            "titulo": "FIRMA DE CONVENIO INSTITUCIONAL ENTRE LA ICAM Y LA CAMACOES BOLIVIA",
+            "descripcion": "<p>Se concretó la firma de un convenio institucional entre la ICAM (Instituto de Crédito Agropecuario) y CAMACOES Bolivia. El acuerdo busca promover el desarrollo del sector agropecuario a través de líneas de crédito preferenciales para empresas asociadas.</p>",
+            "imagen": null,
+            "fecha_publicacion": "2025-07-21 00:00:00",
+            "fecha_evento": "2025-07-21 00:00:00",
+            "estado_id": 1,
+            "visibilidad_id": 1,
+            "publicado_por": null,
+            "autor_visible": "Cámara",
+            "updated_by": null,
+            "created_at": "2026-08-29 22:05:53",
+            "updated_at": "2026-08-29 22:05:53",
+            "deleted_at": null
+        },
+        {
+            "id": 6,
+            "titulo": "PABELLÓN ESPAÑA – FERIA INTERNACIONAL \"EXPOCRUZ 2025\"",
+            "descripcion": "<p>La Cámara Oficial Española organizó la participación del Pabellón España en la Feria Internacional EXPOCRUZ 2025, el evento empresarial más importante del oriente boliviano. Empresas españolas y bolivianas tuvieron la oportunidad de establecer contactos comerciales, presentar sus productos y explorar nuevas oportunidades de negocio.</p>",
+            "imagen": null,
+            "fecha_publicacion": "2025-06-26 00:00:00",
+            "fecha_evento": "2025-06-26 00:00:00",
+            "estado_id": 1,
+            "visibilidad_id": 1,
+            "publicado_por": null,
+            "autor_visible": "Cámara",
+            "updated_by": null,
+            "created_at": "2026-08-29 22:05:53",
+            "updated_at": "2026-08-29 22:05:53",
+            "deleted_at": null
+        }
+    ],
+    "fichas_pais": [
+        {
+            "id": 1,
+            "pais": "Bolivia",
+            "titulo": "Descubre un Mundo de Oportunidades Comerciales en el Corazón de Sudamérica",
+            "descripcion": "Bolivia: un mercado emergente repleto de potencial, diversidad cultural y vastos recursos naturales. Explora las oportunidades comerciales únicas.",
+            "pdf_url": "pdfs/ficha-bolivia.pdf",
+            "orden": 1,
+            "activo": true,
+            "fecha_publicacion": "2026-09-02 17:20:32",
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-09-02 17:20:32",
+            "updated_at": "2026-09-02 17:20:32",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "pais": "España",
+            "titulo": "Uniendo Tradición y Modernidad en un Vibrante Centro de Comercio e Innovación",
+            "descripcion": "Un país que fusiona su rica historia y cultura con una vibrante economía moderna. Descubre un mundo de oportunidades comerciales.",
+            "pdf_url": "pdfs/ficha-espana.pdf",
+            "orden": 2,
+            "activo": true,
+            "fecha_publicacion": "2026-09-02 17:20:42",
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-09-02 17:20:42",
+            "updated_at": "2026-09-02 17:20:42",
+            "deleted_at": null
+        }
+    ],
+    "redes_camaras": [
+        {
+            "id": 1,
+            "nombre": "Cámara de Comercio Española en Argentina",
+            "pais": "Argentina",
+            "ciudad": "Buenos Aires",
+            "direccion": "Av. Santa Fe 1234, Buenos Aires",
+            "telefono": "+54 11 1234-5678",
+            "correo": "info@camaraespana.com.ar",
+            "pagina_web": "https://www.camaraespana.com.ar",
+            "logo": "https://via.placeholder.com/100x100/CC0000/FFFFFF?text=CE",
+            "orden": 1,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-09-06 19:31:59",
+            "updated_at": "2026-09-06 19:31:59",
+            "deleted_at": null
+        },
+        {
+            "id": 2,
+            "nombre": "Cámara de Comercio Española en Chile",
+            "pais": "Chile",
+            "ciudad": "Santiago",
+            "direccion": "Av. Providencia 567, Santiago",
+            "telefono": "+56 2 2345-6789",
+            "correo": "contacto@camaraespana.cl",
+            "pagina_web": "https://www.camaraespana.cl",
+            "logo": "https://via.placeholder.com/100x100/CC0000/FFFFFF?text=CE",
+            "orden": 2,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-09-06 19:31:59",
+            "updated_at": "2026-09-06 19:31:59",
+            "deleted_at": null
+        },
+        {
+            "id": 3,
+            "nombre": "Cámara de Comercio Española en Colombia",
+            "pais": "Colombia",
+            "ciudad": "Bogotá",
+            "direccion": "Calle 123 #45-67, Bogotá",
+            "telefono": "+57 1 3456-7890",
+            "correo": "info@camaraespana.com.co",
+            "pagina_web": "https://www.camaraespana.com.co",
+            "logo": "https://via.placeholder.com/100x100/CC0000/FFFFFF?text=CE",
+            "orden": 3,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-09-06 19:31:59",
+            "updated_at": "2026-09-06 19:31:59",
+            "deleted_at": null
+        },
+        {
+            "id": 4,
+            "nombre": "Cámara de Comercio Española en México",
+            "pais": "México",
+            "ciudad": "Ciudad de México",
+            "direccion": "Paseo de la Reforma 456, CDMX",
+            "telefono": "+52 55 4567-8901",
+            "correo": "contacto@camaraespana.mx",
+            "pagina_web": "https://www.camaraespana.mx",
+            "logo": "https://via.placeholder.com/100x100/CC0000/FFFFFF?text=CE",
+            "orden": 4,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-09-06 19:31:59",
+            "updated_at": "2026-09-06 19:31:59",
+            "deleted_at": null
+        },
+        {
+            "id": 5,
+            "nombre": "Cámara de Comercio Española en Perú",
+            "pais": "Perú",
+            "ciudad": "Lima",
+            "direccion": "Av. Javier Prado 789, Lima",
+            "telefono": "+51 1 5678-9012",
+            "correo": "info@camaraespana.pe",
+            "pagina_web": "https://www.camaraespana.pe",
+            "logo": "https://via.placeholder.com/100x100/CC0000/FFFFFF?text=CE",
+            "orden": 5,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-09-06 19:31:59",
+            "updated_at": "2026-09-06 19:31:59",
+            "deleted_at": null
+        }
+    ],
+    "teams": [
+        {
+            "id": 1,
+            "name": "MEDINA, GALINDO & RICHTER ABOGADOS S.R.L.",
+            "slug": "medina-galindo-richter-abogados",
+            "is_personal": false,
+            "created_at": "2026-08-30 19:12:46",
+            "updated_at": "2026-08-30 19:12:46",
+            "deleted_at": null,
+            "nit": "123456789",
+            "descripcion": "MEDINA, GALINDO & RICHTER ABOGADOS S.R.L. es una firma legal boutique fundada en octubre de 2009 en la ciudad de La Paz, Bolivia. Cuenta con oficina principal en La Paz, una oficina en Santa Cruz de la Sierra y abogados corresponsales en Cochabamba, Sucre y Tarija.",
+            "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQM4JYEEpl805NVjqFoOFMwgrVa41tXcVm-qMdusiAOkA&s=10",
+            "nombre_contacto": "Rodrigo Galindo Garrett",
+            "telefono1": "(591 2) 2773520",
+            "telefono2": "591 76560200",
+            "correo_electronico": "info@mgr.bo",
+            "direccion": "Calle Claudio Aliaga No. 1367, Edif. Rhesus, PH, zona San Miguel, La Paz - Bolivia",
+            "categoria_id": 1,
+            "estado_id": 1,
+            "fecha_afiliacion": "2009-10-01"
+        }
+    ],
+    "contactos_afiliados": [
+        {
+            "id": 1,
+            "team_id": 1,
+            "nombre": "Rodrigo Galindo Garrett",
+            "cargo": "Socio Gerente",
+            "telefono": "591 76560200",
+            "correo_electronico": "rgalindo@mgr.bo",
+            "orden": 1,
+            "activo": true,
+            "created_by": null,
+            "updated_by": null,
+            "created_at": "2026-08-30 19:15:30",
+            "updated_at": "2026-08-30 19:15:30",
+            "deleted_at": null
+        }
+    ],
+    "noticia_categoria": [
+        {
+            "noticia_id": 1,
+            "categoria_id": 1
+        },
+        {
+            "noticia_id": 1,
+            "categoria_id": 2
+        },
+        {
+            "noticia_id": 1,
+            "categoria_id": 3
+        },
+        {
+            "noticia_id": 2,
+            "categoria_id": 2
+        },
+        {
+            "noticia_id": 2,
+            "categoria_id": 3
+        },
+        {
+            "noticia_id": 2,
+            "categoria_id": 5
+        },
+        {
+            "noticia_id": 3,
+            "categoria_id": 2
+        },
+        {
+            "noticia_id": 3,
+            "categoria_id": 4
+        },
+        {
+            "noticia_id": 4,
+            "categoria_id": 1
+        }
+    ],
+    "actividad_categoria": [
+        {
+            "actividad_id": 1,
+            "categoria_id": 2
+        },
+        {
+            "actividad_id": 1,
+            "categoria_id": 3
+        },
+        {
+            "actividad_id": 1,
+            "categoria_id": 4
+        },
+        {
+            "actividad_id": 1,
+            "categoria_id": 5
+        },
+        {
+            "actividad_id": 2,
+            "categoria_id": 2
+        },
+        {
+            "actividad_id": 2,
+            "categoria_id": 3
+        },
+        {
+            "actividad_id": 2,
+            "categoria_id": 4
+        },
+        {
+            "actividad_id": 2,
+            "categoria_id": 5
+        },
+        {
+            "actividad_id": 2,
+            "categoria_id": 6
+        },
+        {
+            "actividad_id": 3,
+            "categoria_id": 2
+        },
+        {
+            "actividad_id": 3,
+            "categoria_id": 3
+        },
+        {
+            "actividad_id": 3,
+            "categoria_id": 4
+        },
+        {
+            "actividad_id": 3,
+            "categoria_id": 5
+        },
+        {
+            "actividad_id": 5,
+            "categoria_id": 2
+        },
+        {
+            "actividad_id": 5,
+            "categoria_id": 3
+        },
+        {
+            "actividad_id": 5,
+            "categoria_id": 4
+        },
+        {
+            "actividad_id": 5,
+            "categoria_id": 5
+        },
+        {
+            "actividad_id": 4,
+            "categoria_id": 2
+        },
+        {
+            "actividad_id": 4,
+            "categoria_id": 3
+        },
+        {
+            "actividad_id": 4,
+            "categoria_id": 4
+        },
+        {
+            "actividad_id": 4,
+            "categoria_id": 5
+        },
+        {
+            "actividad_id": 6,
+            "categoria_id": 1
+        },
+        {
+            "actividad_id": 6,
+            "categoria_id": 2
+        },
+        {
+            "actividad_id": 6,
+            "categoria_id": 3
+        },
+        {
+            "actividad_id": 6,
+            "categoria_id": 4
+        },
+        {
+            "actividad_id": 6,
+            "categoria_id": 5
+        }
+    ]
+}

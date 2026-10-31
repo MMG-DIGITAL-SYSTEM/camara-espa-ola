@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @class(['dark' => ($appearance ?? 'system') == 'dark'])>
+{{-- translate="no": los traductores del navegador reescriben el texto del DOM y React deja de poder actualizarlo (pantalla en negro). --}}
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" translate="no" @class(['dark' => ($appearance ?? 'system') == 'dark'])>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="google" content="notranslate">
 
         {{-- Inline script to detect system dark mode preference and apply it immediately --}}
         <script>
@@ -37,7 +39,11 @@
         @fonts
 
         @viteReactRefresh
-        @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
+        @vite(array_filter([
+            'resources/css/app.css',
+            'resources/js/app.tsx',
+            \App\Support\PaginaInertia::entrypoint($page['component']),
+        ]))
         <x-inertia::head>
             <title>{{ config('app.name', 'Laravel') }}</title>
         </x-inertia::head>
