@@ -39,7 +39,7 @@ Sinchi Wayra S.A.: Sociedad Anónima 100 % de capital privado del inversionista 
 Sociedad Minera Illapa S.A.: Sociedad Anónima que administra las Minas de Bolívar (Oruro) y Porco (Potosí) y sus respectivas Plantas Concentradoras, bajo el Contrato de Asociación, con participación de 45 % de capital privado y 55 % de COMIBOL (Corporación Minera de Bolivia, del Estado Plurinacional).
 Sociedad Minero Metalúrgica Reserva Ltda.: Sociedad de Responsabilidad Limitada, pertenece 100 % al inversionista, y es parte del grupo minero Caballo Blanco con las Minas Reserva y Tres Amigos (Potosí).
 Empresa Minera San Lucas S.A.: Sociedad Anónima enfocada en la comercialización de minerales, perteneciente a Santacruz Silver Mining Ltd. con actividades en las operaciones antes descritas.',
-        'imagen' => '/storage/medios/2026/10/captura-de-pantalla-2026-10-29-135132-EvvakT.png',
+        'imagen' => 'medios/2026/10/captura-de-pantalla-2026-10-29-135132-EvvakT.png',
         'sitio_web' => 'https://sinchiwayra.com.bo',
         'nombre_contacto' => null,
         'telefono1' => '+591 2 2153332',
@@ -63,7 +63,7 @@ Empresa Minera San Lucas S.A.: Sociedad Anónima enfocada en la comercializació
         'slug' => 'av-6-de-agosto-no-2455-edificio-hilda-piso-5-of-501',
         'nit' => '12345655',
         'descripcion' => null,
-        'imagen' => '/storage/medios/2026/10/captura-de-pantalla-2026-10-29-141236-NN7MQZ.png',
+        'imagen' => 'medios/2026/10/captura-de-pantalla-2026-10-29-141236-NN7MQZ.png',
         'sitio_web' => 'https://Efe.com.bo',
         'nombre_contacto' => null,
         'telefono1' => '591 2 2445770',
@@ -93,7 +93,7 @@ Alimentar a los bolivianos con productos de calidad, respetando nuestra tradici�
 Visión
 
 Ser uno de los líderes en la producción y comercialización de alimentos en Bolivia, para consolidarnos como una empresa familiar de clase mundial.',
-        'imagen' => '/storage/medios/2026/10/captura-de-pantalla-2026-10-29-141736-fDFR3R.png',
+        'imagen' => 'medios/2026/10/captura-de-pantalla-2026-10-29-141736-fDFR3R.png',
         'sitio_web' => null,
         'nombre_contacto' => null,
         'telefono1' => '591 3 3462673',
@@ -117,7 +117,7 @@ Ser uno de los líderes en la producción y comercialización de alimentos en Bo
         'slug' => 'madrid',
         'nit' => '8877969',
         'descripcion' => null,
-        'imagen' => '/storage/medios/2026/10/captura-de-pantalla-2026-10-29-142046-TNsH06.png',
+        'imagen' => 'medios/2026/10/captura-de-pantalla-2026-10-29-142046-TNsH06.png',
         'sitio_web' => null,
         'nombre_contacto' => null,
         'telefono1' => null,
@@ -147,7 +147,7 @@ Productos originales y certificados.
 Somos representantes y distribuidores de las mejores marcas a nivel mundial en 
 
 Refrigeración y Aire acondicionado',
-        'imagen' => '/storage/medios/2026/10/captura-de-pantalla-2026-10-29-142329-FB83WH.png',
+        'imagen' => 'medios/2026/10/captura-de-pantalla-2026-10-29-142329-FB83WH.png',
         'sitio_web' => null,
         'nombre_contacto' => null,
         'telefono1' => '591 3 3321721',

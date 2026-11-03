@@ -9,7 +9,7 @@ return [
         'pais' => 'Bolivia',
         'titulo' => 'Descubre un Mundo de Oportunidades Comerciales en el Corazón de Sudamérica',
         'descripcion' => 'Bolivia: un mercado emergente repleto de potencial, diversidad cultural y vastos recursos naturales. Explora las oportunidades comerciales únicas.',
-        'pdf_url' => '/storage/medios/2026/10/0-libro-derecho-economico-y-empresarial-resaltado-a-5-tp3AxC.pdf',
+        'pdf_url' => 'medios/2026/10/0-libro-derecho-economico-y-empresarial-resaltado-a-5-tp3AxC.pdf',
         'orden' => 1,
         'activo' => true,
         'fecha_publicacion' => '2026-09-02 00:00:00',
