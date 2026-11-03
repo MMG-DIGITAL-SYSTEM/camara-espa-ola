@@ -16,11 +16,16 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolSeeder::class,
-            AdminSeeder::class,
-            ContenidoInicialSeeder::class,
+            CatalogoSeeder::class,
+            SocioSeeder::class,
+            DirectorioSeeder::class,
+            ActividadSeeder::class,
+            NoticiaSeeder::class,
+            ContenidoSeeder::class,
+            OfertaEmpleoSeeder::class,
             PaginasSeeder::class,
             MenuSeeder::class,
-            AjustesSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }

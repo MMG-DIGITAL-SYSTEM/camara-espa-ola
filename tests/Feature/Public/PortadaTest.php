@@ -8,7 +8,7 @@ use App\Models\EstadoPublicacion;
 use App\Models\Pagina;
 use App\Models\Servicio;
 use App\Models\Visibilidad;
-use Database\Seeders\PaginasSeeder;
+use Database\Factories\PaginaSeccionFactory;
 use Inertia\Testing\AssertableInertia as Assert;
 
 beforeEach(function () {
@@ -115,8 +115,71 @@ test('cada actividad trae categorías, extracto en texto plano y el enlace a su 
 // PORTADA COMPLETA
 // ============================================================
 
+/**
+ * Página de inicio con los cinco bloques que trae de fábrica. PaginasSeeder
+ * ya no sirve como fixture acá: siembra el contenido real del backup, que
+ * trae más bloques y evoluciona con cada actualización de datos.
+ */
+function paginaInicio(): Pagina
+{
+    $pagina = Pagina::factory()->create(['slug' => 'inicio']);
+
+    $secciones = [
+        ['hero', [
+            'antetitulo' => 'Cámara Oficial Española en Bolivia',
+            'titulo' => 'Cámara de Comercio',
+            'titulo_destacado' => 'Española',
+            'subtitulo' => 'en Bolivia',
+            'alineacion' => 'centro',
+            'boton_texto' => 'Afíliate',
+            'boton_enlace' => '/afiliate/formulario',
+        ]],
+        ['presentacion', [
+            'antetitulo' => 'Quiénes somos',
+            'titulo' => 'Impulsamos las relaciones económicas entre España y Bolivia',
+            'seccion' => 'nosotros',
+            'boton_texto' => 'Conoce la Cámara',
+            'boton_enlace' => '/la-camara',
+        ]],
+        ['actividades-proximas', [
+            'titulo' => 'Últimas actividades',
+            'columnas' => '3',
+            'limite' => 3,
+            'solo_proximas' => false,
+            'enlace_texto' => 'Ver todas',
+            'enlace' => '/actividades',
+        ]],
+        ['servicios', [
+            'titulo' => 'Nuestros servicios',
+            'columnas' => '3',
+            'limite' => 6,
+            'enlace_texto' => 'Ver todos',
+            'enlace' => '/servicios',
+        ]],
+        ['texto-imagen', [
+            'antetitulo' => 'Nuestros socios',
+            'titulo' => 'Juntos en Crecimiento: Potenciando Negocios, Forjando Alianzas',
+            'contenido' => '<p>Nuestros socios son el corazón de nuestra comunidad empresarial.</p>',
+            'posicion_imagen' => 'izquierda',
+            'boton_texto' => 'Conoce nuestros socios',
+            'boton_enlace' => '/socios',
+        ]],
+    ];
+
+    foreach ($secciones as $orden => [$bloque, $datos]) {
+        PaginaSeccionFactory::new()->bloque($bloque, $datos)->create([
+            'pagina_id' => $pagina->id,
+            'orden' => $orden,
+        ]);
+    }
+
+    $pagina->publicar();
+
+    return $pagina;
+}
+
 test('la portada resume los módulos con datos reales', function () {
-    $this->seed(PaginasSeeder::class);
+    paginaInicio();
 
     ContenidoInstitucional::create([
         'seccion' => 'nosotros',
@@ -152,7 +215,7 @@ test('la portada resume los módulos con datos reales', function () {
 });
 
 test('la portada no se rompe si los módulos están vacíos', function () {
-    $this->seed(PaginasSeeder::class);
+    paginaInicio();
 
     $this->get('/')
         ->assertOk()

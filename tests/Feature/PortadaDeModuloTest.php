@@ -4,7 +4,9 @@ use App\Bloques\PortadasDeModulo;
 use App\Bloques\RegistroDeBloques;
 use App\Models\Pagina;
 use Database\Factories\PaginaSeccionFactory;
+use Database\Seeders\CatalogoSeeder;
 use Database\Seeders\PaginasSeeder;
+use Database\Seeders\SocioSeeder;
 use Inertia\Testing\AssertableInertia as Assert;
 
 /*
@@ -96,6 +98,10 @@ test('oculta en el editor, la portada desaparece del sitio', function () {
 });
 
 test('las páginas de módulo sembradas nacen con su portada', function () {
+    // PaginasSeeder siembra datos reales: created_by/updated_by apuntan a
+    // usuarios reales del backup, y socios depende de sus propios catálogos.
+    $this->seed(CatalogoSeeder::class);
+    $this->seed(SocioSeeder::class);
     $this->seed(PaginasSeeder::class);
 
     $this->get('/la-camara')
@@ -110,6 +116,10 @@ test('las páginas de módulo sembradas nacen con su portada', function () {
 });
 
 test('la cabecera de contacto es una portada clara y editable', function () {
+    // PaginasSeeder siembra datos reales: created_by/updated_by apuntan a
+    // usuarios reales del backup, y socios depende de sus propios catálogos.
+    $this->seed(CatalogoSeeder::class);
+    $this->seed(SocioSeeder::class);
     $this->seed(PaginasSeeder::class);
 
     $this->get('/contacto')
