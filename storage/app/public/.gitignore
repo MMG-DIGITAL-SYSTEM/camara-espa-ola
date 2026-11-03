@@ -1,2 +1,9 @@
 *
 !.gitignore
+
+# Contenido real del backup de producción (camaraesp.sql): se versiona para
+# que un `git pull` alcance, sin tener que subirlo a mano por scp cada vez.
+# Lo que suba un editor desde el panel de ahora en más NO entra acá: solo
+# vive en el disco del servidor, como corresponde a contenido de usuario.
+!medios/
+!medios/**
