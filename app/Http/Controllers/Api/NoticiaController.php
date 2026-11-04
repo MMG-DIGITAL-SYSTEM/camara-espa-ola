@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use App\Models\Noticia;
+use App\Support\Archivo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -36,7 +37,7 @@ class NoticiaController extends Controller
                 $query->where('destacada', true);
             }
 
-            $noticias = $query->get();
+            $noticias = $query->get()->each(fn (Noticia $noticia) => $this->conImagenPublica($noticia));
 
             // Obtener todas las categorías registradas
             $categorias = Categoria::query()->orderBy('nombre')->get();
@@ -82,7 +83,7 @@ class NoticiaController extends Controller
             if ($request->is('api/*')) {
                 return response()->json([
                     'success' => true,
-                    'data' => $noticia,
+                    'data' => $this->conImagenPublica($noticia),
                 ]);
             }
 
@@ -92,7 +93,7 @@ class NoticiaController extends Controller
                     'titulo' => $noticia->titulo,
                     'descripcion' => $noticia->descripcion,
                     'extracto' => $noticia->extracto,
-                    'imagen' => $noticia->imagen ? asset('storage/'.$noticia->imagen) : null,
+                    'imagen' => Archivo::url($noticia->imagen),
                     'fecha_publicacion' => $noticia->fecha_publicacion?->format('Y-m-d'),
                     'fecha_evento' => $noticia->fecha_evento?->format('Y-m-d'),
                     'destacada' => $noticia->destacada,
@@ -130,5 +131,15 @@ class NoticiaController extends Controller
                 'message' => $e->getMessage(),
             ], 500);
         }
+    }
+
+    /**
+     * La columna guarda la ruta del disco (`medios/…`): sin pasarla por
+     * `Archivo::url`, el navegador la resolvía contra /noticias y la imagen
+     * salía rota. Solo cambia lo que se serializa; la noticia no se guarda.
+     */
+    private function conImagenPublica(Noticia $noticia): Noticia
+    {
+        return $noticia->setAttribute('imagen', Archivo::url($noticia->imagen));
     }
 }

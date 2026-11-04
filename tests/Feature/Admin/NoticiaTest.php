@@ -183,3 +183,27 @@ test('eliminar una noticia la retira del sitio', function () {
     $this->assertSoftDeleted($noticia);
     expect(Noticia::activas()->count())->toBe(0);
 });
+
+test('la imagen de una noticia llega al sitio público con su dirección de storage', function () {
+    $this->actingAs($this->editor)->post(route('admin.noticias.store'), datosDeNoticia([
+        'imagen' => 'medios/2026/10/convenio.png',
+    ]));
+
+    $noticia = Noticia::sole();
+
+    $this->getJson('/api/noticias')
+        ->assertOk()
+        ->assertJsonPath('data.0.imagen', asset('storage/medios/2026/10/convenio.png'));
+
+    $this->getJson('/api/noticias/'.$noticia->slug)
+        ->assertOk()
+        ->assertJsonPath('data.imagen', asset('storage/medios/2026/10/convenio.png'));
+
+    expect($noticia->fresh()->imagen)->toBe('medios/2026/10/convenio.png');
+});
+
+test('una noticia sin imagen llega sin imagen al sitio público', function () {
+    $this->actingAs($this->editor)->post(route('admin.noticias.store'), datosDeNoticia());
+
+    $this->getJson('/api/noticias')->assertJsonPath('data.0.imagen', null);
+});
