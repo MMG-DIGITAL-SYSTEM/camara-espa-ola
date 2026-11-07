@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\SocioController as AdminSocioController;
 use App\Http\Controllers\Admin\SolicitudAfiliacionController as AdminSolicitudAfiliacionController;
 use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\Api\ActividadController;
+use App\Http\Controllers\Api\AsistenteController;
 use App\Http\Controllers\Api\CamaraController;
 use App\Http\Controllers\Api\ContactoController;
 use App\Http\Controllers\Api\ConvenioController;
@@ -51,7 +52,7 @@ Route::get('/la-camara', [CamaraController::class, 'index'])->name('camara');
 
 // Actividades
 Route::prefix('actividades')->group(function () {
-    Route::get('/', [ActividadController::class, 'index']);
+    Route::get('/', [ActividadController::class, 'index'])->name('actividades');
     Route::get('/categorias', [ActividadController::class, 'categorias']);
     Route::get('/{id}', [ActividadController::class, 'show']);
 });
@@ -100,6 +101,9 @@ Route::get('/bolsa-de-trabajo/{oferta}', [BolsaTrabajoController::class, 'show']
 */
 
 Route::prefix('api')->group(function () {
+    Route::post('/asistente', [AsistenteController::class, 'store'])
+        ->middleware('throttle:asistente')
+        ->name('api.asistente.store');
     Route::post('/contacto', [ContactoController::class, 'store'])
         ->middleware('throttle:contacto')
         ->name('api.contacto.store');

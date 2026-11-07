@@ -46,6 +46,8 @@ class AppServiceProvider extends ServiceProvider
             Limit::perDay(20)->by($request->ip()),
         ]);
 
+        RateLimiter::for('asistente', fn (Request $request): Limit => Limit::perMinute(15)->by($request->ip()));
+
         // Una empresa rara vez manda más de una solicitud: el margen es menor.
         RateLimiter::for('afiliacion', fn (Request $request): array => [
             Limit::perMinute(3)->by($request->ip()),

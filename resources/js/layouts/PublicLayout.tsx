@@ -2,6 +2,7 @@
 import { usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
 import type { ReactNode } from 'react';
+import AsistenteChat from '@/components/public/asistente-chat';
 import Footer from '@/components/public/Footer';
 import Navbar from '@/components/public/Navbar';
 
@@ -48,6 +49,7 @@ export default function PublicLayout({ children }: PublicLayoutProps) {
             {/* Alto de la barra fija sin scroll: logo (h-11 / md:h-14) + py-4. */}
             <main className="flex-1 pt-[76px] md:pt-[88px]">{children}</main>
             <Footer />
+            <AsistenteChat />
         </div>
     );
 }

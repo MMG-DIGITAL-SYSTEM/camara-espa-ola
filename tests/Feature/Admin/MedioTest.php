@@ -3,6 +3,7 @@
 use App\Models\Medio;
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
 
@@ -33,6 +34,33 @@ test('subir una imagen la guarda con sus dimensiones', function () {
         ->and($medio->created_by)->toBe($this->editor->id);
 
     Storage::disk('public')->assertExists($medio->ruta);
+});
+
+test('el disco publico puede usar almacenamiento persistente externo al despliegue', function () {
+    $rutaPersistente = sys_get_temp_dir().'/camara-public-'.bin2hex(random_bytes(8));
+
+    config([
+        'filesystems.disks.public.root' => $rutaPersistente,
+        'filesystems.links' => [public_path('storage') => $rutaPersistente],
+    ]);
+    Storage::forgetDisk('public');
+
+    try {
+        $this->actingAs($this->editor)
+            ->post(route('admin.medios.store'), [
+                'archivos' => [UploadedFile::fake()->image('persistente.png')],
+            ])
+            ->assertInertiaFlash('toast.type', 'success');
+
+        $medio = Medio::sole();
+        $archivoPersistente = $rutaPersistente.'/'.$medio->ruta;
+
+        expect(file_exists($archivoPersistente))->toBeTrue()
+            ->and(config('filesystems.links')[public_path('storage')])->toBe($rutaPersistente);
+    } finally {
+        Storage::forgetDisk('public');
+        File::deleteDirectory($rutaPersistente);
+    }
 });
 
 test('el nombre del archivo se normaliza pero se conserva el original', function () {
