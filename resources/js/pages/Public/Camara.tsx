@@ -204,7 +204,8 @@ function SectionBadge({ text, icon: Icon }: { text: string; icon?: any }) {
 // ============================================
 function InstitutionalSection({ data }: { data: Seccion }) {
     const imagenUrl =
-        'https://images.unsplash.com/photo-1582287233478-e5a7ddfbe5e7?w=800&h=600&fit=crop&q=80';
+        data?.imagen ||
+        'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&h=600&fit=crop&q=80';
 
     return (
         <section

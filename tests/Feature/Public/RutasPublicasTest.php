@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\CategoriaAfiliado;
+use App\Models\ContenidoInstitucional;
 use App\Models\EstadoComercial;
 use App\Models\Socio;
 
@@ -15,6 +16,22 @@ test('las rutas públicas responden', function (string $ruta) {
     'fichas país' => '/fichas-pais',
     'red de cámaras' => '/red-camaras',
 ]);
+
+test('la cámara envía la imagen subida de nuestra organización', function () {
+    ContenidoInstitucional::create([
+        'seccion' => 'nuestra_organizacion',
+        'titulo' => 'Nuestra Organización',
+        'contenido' => 'Texto institucional',
+        'imagen' => 'medios/2026/11/organizacion.jpg',
+    ]);
+
+    $this->get('/la-camara')
+        ->assertOk()
+        ->assertInertia(fn ($pagina) => $pagina
+            ->component('Public/Camara')
+            ->where('data.nuestra_organizacion.imagen', asset('storage/medios/2026/11/organizacion.jpg'))
+        );
+});
 
 test('la api pública responde', function (string $ruta) {
     $this->getJson($ruta)->assertOk();
