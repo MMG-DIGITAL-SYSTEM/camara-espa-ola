@@ -169,3 +169,20 @@ test('una portada en borrador no se muestra al visitante, pero sí al editor', f
             ->component('Public/Pagina')
             ->where('vistaPrevia', true));
 });
+
+test('una imagen guardada con el host de desarrollo se sirve con el de la petición', function () {
+    config(['app.url' => 'https://camara.test']);
+
+    $pagina = Pagina::factory()->create(['slug' => 'con-portada']);
+
+    PaginaSeccionFactory::new()
+        ->bloque('hero', ['imagen' => 'http://localhost:8000/storage/medios/2026/11/portada.jpg'])
+        ->create(['pagina_id' => $pagina->id, 'orden' => 0]);
+
+    $pagina->publicar();
+
+    $this->get('/con-portada')
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('secciones.0.datos.imagen', url('/storage/medios/2026/11/portada.jpg')));
+});

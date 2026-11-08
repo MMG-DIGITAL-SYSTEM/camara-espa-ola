@@ -4,6 +4,7 @@
 
 namespace App\Models;
 
+use App\Support\Archivo;
 use Database\Factories\PaginaSeccionFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -90,7 +91,7 @@ class PaginaSeccion extends Model
             'nombre' => $this->nombre,
             'orden' => $this->orden,
             'es_visible' => $this->es_visible,
-            'datos' => $this->datos ?? [],
+            'datos' => Archivo::normalizarUrls($this->datos ?? []),
             'estilos' => $this->estilos ?? [],
         ];
     }

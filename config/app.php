@@ -55,6 +55,17 @@ return [
     'url' => env('APP_URL', 'http://localhost'),
 
     /*
+    | Orígenes con los que se guardaron archivos en el pasado (por ejemplo, la
+    | base copiada desde desarrollo). Las URLs de storage con estos orígenes se
+    | tratan como propias y se sirven con el host de la petición actual.
+    */
+
+    'urls_anteriores' => array_values(array_filter(array_map(
+        'trim',
+        explode(',', (string) env('APP_URLS_ANTERIORES', 'http://localhost:8000,http://127.0.0.1:8000')),
+    ))),
+
+    /*
     |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------

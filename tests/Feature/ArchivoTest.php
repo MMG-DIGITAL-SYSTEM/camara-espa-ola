@@ -31,3 +31,34 @@ test('una URL propia fuera de storage se deja tal cual', function () {
 test('un valor vacío no tiene URL', function (?string $ruta) {
     expect(Archivo::url($ruta))->toBeNull();
 })->with([null, '']);
+
+test('una URL guardada en desarrollo se sirve con el host de producción', function () {
+    config(['app.url' => 'http://camara.test', 'app.urls_anteriores' => ['http://localhost:8000']]);
+    URL::forceRootUrl('http://camara.test');
+
+    expect(Archivo::url('http://localhost:8000/storage/medios/2026/11/foto.jpg'))
+        ->toBe('http://camara.test/storage/medios/2026/11/foto.jpg');
+});
+
+test('una ruta relativa a la raíz de storage se sirve con el host de la petición', function () {
+    expect(Archivo::url('/storage/medios/foto.jpg'))
+        ->toBe('http://127.0.0.1:8000/storage/medios/foto.jpg');
+});
+
+test('normalizar URLs solo rehace las del storage propio', function () {
+    $datos = [
+        'titulo' => 'Cámara',
+        'imagen' => 'http://localhost:8000/storage/medios/foto.jpg',
+        'enlace' => 'http://localhost:8000/socios',
+        'externa' => 'https://cdn.test/storage/x.jpg',
+        'items' => [['imagen' => 'http://localhost:8000/storage/medios/b.png', 'orden' => 2]],
+    ];
+
+    expect(Archivo::normalizarUrls($datos))->toBe([
+        'titulo' => 'Cámara',
+        'imagen' => 'http://127.0.0.1:8000/storage/medios/foto.jpg',
+        'enlace' => 'http://localhost:8000/socios',
+        'externa' => 'https://cdn.test/storage/x.jpg',
+        'items' => [['imagen' => 'http://127.0.0.1:8000/storage/medios/b.png', 'orden' => 2]],
+    ]);
+});

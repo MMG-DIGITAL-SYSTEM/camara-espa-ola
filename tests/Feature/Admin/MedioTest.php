@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Inertia\Testing\AssertableInertia as Assert;
 
 beforeEach(function () {
@@ -183,4 +184,19 @@ test('eliminar un medio borra también el archivo del disco', function () {
 
     Storage::disk('public')->assertMissing($ruta);
     expect(Medio::count())->toBe(0);
+});
+
+test('la URL de un medio usa el host de la petición aunque APP_URL sea otro', function () {
+    config(['app.url' => 'http://localhost:8000']);
+    URL::forceRootUrl('http://camara.test');
+
+    $medio = Medio::create([
+        'disco' => 'public',
+        'ruta' => 'medios/2026/11/foto.jpg',
+        'nombre_original' => 'foto.jpg',
+        'mime' => 'image/jpeg',
+        'tamano' => 1000,
+    ]);
+
+    expect($medio->url())->toBe('http://camara.test/storage/medios/2026/11/foto.jpg');
 });

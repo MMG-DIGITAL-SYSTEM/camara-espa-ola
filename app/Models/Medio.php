@@ -4,6 +4,7 @@
 
 namespace App\Models;
 
+use App\Support\Archivo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
@@ -48,8 +49,17 @@ class Medio extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    /**
+     * Los archivos del disco público se sirven con el host de la petición,
+     * no con APP_URL: así la biblioteca funciona aunque APP_URL no coincida
+     * con el dominio por el que se entra.
+     */
     public function url(): string
     {
+        if ($this->disco === 'public') {
+            return (string) Archivo::url($this->ruta);
+        }
+
         return Storage::disk($this->disco)->url($this->ruta);
     }
 
