@@ -1,9 +1,8 @@
 /**
- * Versión oscura del logotipo original, para fondos claros. Se usa cuando en
- * Ajustes del sitio no hay un logotipo subido.
+ * Logotipo oficial con el escudo, para fondos claros. Vive en «public/images»
+ * y se usa cuando en Ajustes del sitio no hay un logotipo subido.
  */
-const LOGO_OSCURO =
-    'https://camara.com.bo/wp-content/uploads/2023/05/logo-negro.svg';
+const LOGO_OSCURO = '/images/logo-camara.svg';
 
 /** Dirección del logotipo a partir del valor guardado en Ajustes del sitio. */
 export function urlDelLogo(valor?: string | null): string {
