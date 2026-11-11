@@ -7,10 +7,12 @@ import {
     Users,
     ChevronRight,
     Share2,
-    Heart,
 } from 'lucide-react';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { HtmlEnriquecido } from '@/blocks/componentes/estructura';
+import { BotonMeGusta } from '@/components/public/boton-me-gusta';
+import { SeccionComentarios } from '@/components/public/comentarios';
+import type { ComentarioPublico } from '@/components/public/comentarios';
 import { ImagenSinRecorte } from '@/components/public/imagen-sin-recorte';
 import PublicLayout from '@/layouts/PublicLayout';
 import { textoPlano } from '@/lib/utils';
@@ -49,6 +51,9 @@ interface ActividadDetalle {
     categorias: Categoria[];
     secciones: Seccion[];
     archivos: Archivo[];
+    me_gusta_count: number;
+    le_gusta: boolean;
+    comentarios: ComentarioPublico[];
 }
 
 // ============================================
@@ -490,10 +495,15 @@ function Sidebar({ actividad }: { actividad: ActividadDetalle }) {
                                 }
                                 title={actividad.titulo}
                             />
-                            <button className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition-all duration-300 hover:border-red-300 hover:bg-red-50 hover:text-red-600">
-                                <Heart className="h-4 w-4" />
-                                <span>Me gusta</span>
-                            </button>
+                            <BotonMeGusta
+                                objetivo={{
+                                    tipo: 'actividad',
+                                    id: actividad.id,
+                                }}
+                                totalInicial={actividad.me_gusta_count}
+                                leGustaInicial={actividad.le_gusta}
+                                className="rounded-lg py-2.5"
+                            />
                         </div>
                     </div>
                 </FadeInRight>
@@ -631,6 +641,14 @@ export default function ActividadShow({ data }: { data: ActividadDetalle }) {
                         {/* Columna principal - Contenido */}
                         <div className="lg:col-span-2">
                             <MainContent actividad={actividad} />
+
+                            <SeccionComentarios
+                                destino={{
+                                    tipo: 'actividad',
+                                    id: actividad.id,
+                                }}
+                                comentarios={actividad.comentarios}
+                            />
                         </div>
 
                         {/* Sidebar - Información y Compartir */}

@@ -1,5 +1,6 @@
 // resources/js/pages/Public/Camara/index.tsx
 import {
+    BookOpen,
     Download,
     FileText,
     Users,
@@ -8,7 +9,9 @@ import {
     Eye,
     FileCheck,
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { LectorLibro } from '@/components/public/fichas-pais/lector-libro';
+import { LibroPdf, usePortada } from '@/components/public/libro-pdf';
 import { SeccionesDelModulo } from '@/components/public/secciones-del-modulo';
 import PublicLayout from '@/layouts/PublicLayout';
 
@@ -197,7 +200,6 @@ function SectionBadge({ text, icon: Icon }: { text: string; icon?: any }) {
         </div>
     );
 }
-
 
 // ============================================
 // NUESTRA ORGANIZACIÓN - CON IMAGEN Y ANIMACIONES
@@ -496,10 +498,18 @@ function PurposeSection({
 // ============================================
 // ESTATUTOS CON ANIMACIONES
 // ============================================
+/** Ancho al que se dibuja la portada del libro de los estatutos. */
+const ANCHO_PORTADA_ESTATUTOS = 260;
+
 function StatutesSection({ data }: { data: Seccion }) {
     const imagenUrl =
         data?.imagen ||
         'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop&q=80';
+    const pdf = data?.pdf_url ?? null;
+    const titulo = data?.titulo || 'Estatutos';
+    const { portada, paginas } = usePortada(pdf, ANCHO_PORTADA_ESTATUTOS);
+    const [leyendo, setLeyendo] = useState(false);
+    const cerrarLector = useCallback(() => setLeyendo(false), []);
 
     return (
         <section className="relative overflow-hidden bg-gray-50 py-24 md:py-32">
@@ -521,39 +531,85 @@ function StatutesSection({ data }: { data: Seccion }) {
                                     {data?.contenido ||
                                         'Conoce la normativa que rige nuestra institución y los principios que nos guían en el desarrollo de nuestras actividades.'}
                                 </p>
-                                {data?.pdf_url && (
-                                    <a
-                                        href={data.pdf_url}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="group relative inline-flex items-center gap-4 overflow-hidden rounded-full bg-red-600 px-8 py-4 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-red-700 hover:shadow-xl"
-                                    >
-                                        <span className="relative z-10 flex items-center gap-4">
-                                            <FileText className="h-5 w-5" />
-                                            <span>Descargar Estatutos</span>
-                                            <Download className="h-5 w-5 transition-transform group-hover:translate-y-1" />
-                                        </span>
-                                        <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-red-500 via-white/20 to-red-500 transition-transform duration-1000 group-hover:translate-x-full" />
-                                    </a>
+                                {pdf && (
+                                    <div className="flex flex-wrap items-center gap-3">
+                                        <button
+                                            type="button"
+                                            onClick={() => setLeyendo(true)}
+                                            className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-red-600 px-8 py-4 font-medium text-white transition-all duration-300 hover:scale-105 hover:bg-red-700 hover:shadow-xl"
+                                        >
+                                            <span className="relative z-10 flex items-center gap-3">
+                                                <BookOpen className="h-5 w-5" />
+                                                <span>Leer los estatutos</span>
+                                            </span>
+                                            <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-red-500 via-white/20 to-red-500 transition-transform duration-1000 group-hover:translate-x-full" />
+                                        </button>
+                                        <a
+                                            href={pdf}
+                                            download
+                                            className="inline-flex items-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-4 font-medium text-gray-700 transition hover:border-red-300 hover:text-red-600"
+                                        >
+                                            <Download className="h-5 w-5" />
+                                            Descargar PDF
+                                        </a>
+                                    </div>
                                 )}
                             </div>
                         </FadeInLeft>
 
                         <FadeInRight>
-                            <div className="relative">
-                                <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl">
-                                    <img
-                                        src={imagenUrl}
-                                        alt="Estatutos"
-                                        className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                            {pdf ? (
+                                <div className="group relative flex flex-col items-center py-6">
+                                    <div className="absolute inset-x-6 top-1/2 h-40 -translate-y-1/2 rounded-full bg-red-600/10 blur-3xl" />
+                                    <LibroPdf
+                                        titulo={titulo}
+                                        etiqueta="Documentación"
+                                        icono={FileCheck}
+                                        portada={portada}
+                                        disponible
+                                        onAbrir={() => setLeyendo(true)}
+                                        etiquetaAccesible={`Abrir ${titulo}`}
+                                        className="w-52 sm:w-64"
+                                        claseBalda="w-72 sm:w-96"
                                     />
+                                    <p className="mt-6 flex items-center gap-2 text-sm text-gray-500">
+                                        <FileText className="h-4 w-4" />
+                                        {paginas !== null &&
+                                            `${paginas} ${paginas === 1 ? 'página' : 'páginas'} · `}
+                                        Haz clic en el libro para hojearlo
+                                    </p>
                                 </div>
-                                <div className="animate-spin-slow absolute -right-6 -bottom-6 h-32 w-32 rounded-full border-2 border-red-600/20" />
-                            </div>
+                            ) : (
+                                <div className="relative">
+                                    <div className="aspect-[4/3] overflow-hidden rounded-2xl shadow-2xl">
+                                        <img
+                                            src={imagenUrl}
+                                            alt="Estatutos"
+                                            className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                                        />
+                                    </div>
+                                    <div className="animate-spin-slow absolute -right-6 -bottom-6 h-32 w-32 rounded-full border-2 border-red-600/20" />
+                                </div>
+                            )}
                         </FadeInRight>
                     </div>
                 </div>
             </div>
+
+            {leyendo && pdf && (
+                <LectorLibro
+                    ficha={{
+                        id: 0,
+                        pais: '',
+                        titulo,
+                        descripcion: null,
+                        pdf,
+                        fecha_publicacion: null,
+                    }}
+                    etiqueta="Documentación · La Cámara"
+                    onCerrar={cerrarLector}
+                />
+            )}
         </section>
     );
 }

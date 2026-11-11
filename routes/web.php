@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\ActividadController as AdminActividadController;
 use App\Http\Controllers\Admin\AjusteController;
+use App\Http\Controllers\Admin\ComentarioController as AdminComentarioController;
+use App\Http\Controllers\Admin\ContenidoInstitucionalController;
 use App\Http\Controllers\Admin\ConvenioController as AdminConvenioController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DirectivoController;
@@ -21,9 +23,11 @@ use App\Http\Controllers\Admin\UsuarioController;
 use App\Http\Controllers\Api\ActividadController;
 use App\Http\Controllers\Api\AsistenteController;
 use App\Http\Controllers\Api\CamaraController;
+use App\Http\Controllers\Api\ComentarioController as ApiComentarioController;
 use App\Http\Controllers\Api\ContactoController;
 use App\Http\Controllers\Api\ConvenioController;
 use App\Http\Controllers\Api\FichaPaisController;
+use App\Http\Controllers\Api\MeGustaController;
 use App\Http\Controllers\Api\NoticiaController;
 use App\Http\Controllers\Api\OficinaController;
 use App\Http\Controllers\Api\RedCamaraController;
@@ -132,6 +136,26 @@ Route::prefix('api')->group(function () {
         Route::get('/{id}', [RedCamaraController::class, 'show']);
     });
 
+    // Comentarios de visitantes: entran pendientes de moderación.
+    Route::middleware('throttle:comentarios')->name('api.comentarios.')->group(function () {
+        Route::post('/noticias/{slug}/comentarios', [ApiComentarioController::class, 'comentarNoticia'])->name('noticia');
+        Route::post('/actividades/{actividad}/comentarios', [ApiComentarioController::class, 'comentarActividad'])
+            ->whereNumber('actividad')
+            ->name('actividad');
+    });
+
+    // «Me gusta» de visitantes anónimos: POST lo marca, DELETE lo quita.
+    Route::middleware('throttle:me-gusta')->name('api.me-gusta.')->group(function () {
+        Route::post('/noticias/{slug}/me-gusta', [MeGustaController::class, 'marcarNoticia'])->name('noticia.marcar');
+        Route::delete('/noticias/{slug}/me-gusta', [MeGustaController::class, 'quitarNoticia'])->name('noticia.quitar');
+        Route::post('/actividades/{actividad}/me-gusta', [MeGustaController::class, 'marcarActividad'])
+            ->whereNumber('actividad')
+            ->name('actividad.marcar');
+        Route::delete('/actividades/{actividad}/me-gusta', [MeGustaController::class, 'quitarActividad'])
+            ->whereNumber('actividad')
+            ->name('actividad.quitar');
+    });
+
     Route::prefix('noticias')->group(function () {
         Route::get('/', [NoticiaController::class, 'index']);
         Route::get('/categorias', [NoticiaController::class, 'categorias']);
@@ -228,6 +252,19 @@ Route::middleware(['auth', 'verified', 'admin'])
             Route::post('/', [AdminRedCamaraController::class, 'store'])->name('store');
             Route::patch('{camara}', [AdminRedCamaraController::class, 'update'])->name('update');
             Route::delete('{camara}', [AdminRedCamaraController::class, 'destroy'])->name('destroy');
+        });
+
+        // Comentarios de noticias y actividades: moderación.
+        Route::prefix('comentarios')->name('comentarios.')->group(function () {
+            Route::get('/', [AdminComentarioController::class, 'index'])->name('index');
+            Route::patch('{comentario}', [AdminComentarioController::class, 'update'])->name('update');
+            Route::delete('{comentario}', [AdminComentarioController::class, 'destroy'])->name('destroy');
+        });
+
+        // Contenido institucional: las secciones fijas de «La Cámara».
+        Route::prefix('contenido-institucional')->name('contenido-institucional.')->group(function () {
+            Route::get('/', [ContenidoInstitucionalController::class, 'index'])->name('index');
+            Route::patch('{contenido}', [ContenidoInstitucionalController::class, 'update'])->name('update');
         });
 
         // Servicios y directorio: listas cortas y ordenables.

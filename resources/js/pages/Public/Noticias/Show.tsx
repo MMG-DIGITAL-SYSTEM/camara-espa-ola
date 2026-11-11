@@ -5,13 +5,14 @@ import {
     ArrowLeft,
     User,
     Share2,
-    Heart,
-    Bookmark,
     Clock,
     Sparkles,
 } from 'lucide-react';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { HtmlEnriquecido } from '@/blocks/componentes/estructura';
+import { BotonMeGusta } from '@/components/public/boton-me-gusta';
+import { SeccionComentarios } from '@/components/public/comentarios';
+import type { ComentarioPublico } from '@/components/public/comentarios';
 import { ImagenSinRecorte } from '@/components/public/imagen-sin-recorte';
 import PublicLayout from '@/layouts/PublicLayout';
 
@@ -32,6 +33,8 @@ interface NoticiaDetalle {
     autor_visible: string | null;
     slug: string;
     categorias: Categoria[];
+    me_gusta_count: number;
+    le_gusta: boolean;
 }
 
 // ============================================
@@ -455,14 +458,14 @@ function Sidebar({ noticia }: { noticia: NoticiaDetalle }) {
                                 }
                                 title={noticia.titulo}
                             />
-                            <button className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:border-red-300 hover:bg-red-50 hover:text-red-600">
-                                <Heart className="h-4 w-4" />
-                                <span>Me gusta</span>
-                            </button>
-                            <button className="flex w-full items-center justify-center gap-2 rounded-full border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-all duration-300 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-600">
-                                <Bookmark className="h-4 w-4" />
-                                <span>Guardar</span>
-                            </button>
+                            <BotonMeGusta
+                                objetivo={{
+                                    tipo: 'noticia',
+                                    slug: noticia.slug,
+                                }}
+                                totalInicial={noticia.me_gusta_count}
+                                leGustaInicial={noticia.le_gusta}
+                            />
                         </div>
                     </div>
                 </FadeInUp>
@@ -477,6 +480,7 @@ function Sidebar({ noticia }: { noticia: NoticiaDetalle }) {
 export default function NoticiaShow() {
     const { slug } = usePage<{ slug: string }>().props;
     const [noticia, setNoticia] = useState<NoticiaDetalle | null>(null);
+    const [comentarios, setComentarios] = useState<ComentarioPublico[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -489,6 +493,7 @@ export default function NoticiaShow() {
 
                 if (result.success) {
                     setNoticia(result.data);
+                    setComentarios(result.comentarios ?? []);
                 } else {
                     setError(result.message || 'No se pudo cargar la noticia');
                 }
@@ -563,6 +568,14 @@ export default function NoticiaShow() {
                                 {/* Contenido */}
                                 <ContentSection
                                     descripcion={noticia.descripcion}
+                                />
+
+                                <SeccionComentarios
+                                    destino={{
+                                        tipo: 'noticia',
+                                        slug: noticia.slug,
+                                    }}
+                                    comentarios={comentarios}
                                 />
                             </div>
 

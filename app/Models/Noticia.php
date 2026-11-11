@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use App\Concerns\RecibeComentarios;
+use App\Concerns\RecibeMeGusta;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Noticia extends Model
 {
-    use SoftDeletes;
+    use RecibeComentarios, RecibeMeGusta, SoftDeletes;
 
     protected $table = 'noticias';
 

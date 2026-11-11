@@ -31,3 +31,5 @@ yarn-error.log
 
 # Configuración local de Claude Code
 /.claude/settings.local.json
+*.dump
+

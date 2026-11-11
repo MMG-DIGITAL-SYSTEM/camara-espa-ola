@@ -2,6 +2,7 @@
 import { Link } from '@inertiajs/react';
 import { Calendar, ChevronRight, Sparkles, Clock } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { ContadorMeGusta } from '@/components/public/boton-me-gusta';
 import { ImagenSinRecorte } from '@/components/public/imagen-sin-recorte';
 import { SeccionesDelModulo } from '@/components/public/secciones-del-modulo';
 import PublicLayout from '@/layouts/PublicLayout';
@@ -16,6 +17,8 @@ interface Actividad {
     fecha_publicacion: string;
     categorias: string[];
     slug: string;
+    me_gusta_count: number;
+    le_gusta: boolean;
 }
 
 interface ActividadesData {
@@ -272,9 +275,17 @@ function ActividadCard({
                             truncateText(actividad.descripcion, 150)}
                     </p>
 
-                    <div className="mt-5 flex items-center text-sm font-semibold text-red-600 transition-all duration-300 group-hover:translate-x-2">
-                        <span>Leer más</span>
-                        <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    <div className="mt-5 flex items-center justify-between">
+                        <div className="flex items-center text-sm font-semibold text-red-600 transition-all duration-300 group-hover:translate-x-2">
+                            <span>Leer más</span>
+                            <ChevronRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </div>
+                        <div className="text-xs text-gray-400">
+                            <ContadorMeGusta
+                                total={actividad.me_gusta_count}
+                                leGusta={actividad.le_gusta}
+                            />
+                        </div>
                     </div>
                 </div>
             </Link>

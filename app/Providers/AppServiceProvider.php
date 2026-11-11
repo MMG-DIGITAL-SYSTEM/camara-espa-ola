@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Actividad;
+use App\Models\Noticia;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use Illuminate\Cache\RateLimiting\Limit;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -31,6 +34,20 @@ class AppServiceProvider extends ServiceProvider
         $this->configureDefaults();
         $this->configurarPermisos();
         $this->configurarLimites();
+        $this->configurarMorfismos();
+    }
+
+    /**
+     * Nombres cortos en las columnas polimórficas (`me_gusta.contenido_type`):
+     * así renombrar o mover un modelo no deja filas apuntando a una clase
+     * que ya no existe.
+     */
+    protected function configurarMorfismos(): void
+    {
+        Relation::morphMap([
+            'noticia' => Noticia::class,
+            'actividad' => Actividad::class,
+        ]);
     }
 
     /**
@@ -52,6 +69,17 @@ class AppServiceProvider extends ServiceProvider
         RateLimiter::for('afiliacion', fn (Request $request): array => [
             Limit::perMinute(3)->by($request->ip()),
             Limit::perDay(10)->by($request->ip()),
+        ]);
+
+        // Dar y quitar «me gusta» es un clic: margen amplio, pero sin dejar
+        // que un script infle los contadores.
+        RateLimiter::for('me-gusta', fn (Request $request): Limit => Limit::perMinute(30)->by($request->ip()));
+
+        // Nadie escribe más de unos pocos comentarios seguidos: corta el spam
+        // antes de que llene la bandeja de moderación.
+        RateLimiter::for('comentarios', fn (Request $request): array => [
+            Limit::perMinute(3)->by($request->ip()),
+            Limit::perDay(30)->by($request->ip()),
         ]);
     }
 

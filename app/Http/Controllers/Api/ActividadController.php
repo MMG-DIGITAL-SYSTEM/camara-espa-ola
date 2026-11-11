@@ -10,6 +10,7 @@ use App\Models\Actividad;
 use App\Models\Categoria;
 use App\Support\Archivo;
 use App\Support\HtmlSeguro;
+use App\Support\Visitante;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -24,6 +25,7 @@ class ActividadController extends Controller
     public function index(Request $request)
     {
         $query = Actividad::with(['categorias', 'estado', 'publicador'])
+            ->conMeGusta(Visitante::huella($request))
             ->publicadas()
             ->activas()
             ->ordenadas();
@@ -49,6 +51,8 @@ class ActividadController extends Controller
                         'fecha_publicacion' => $actividad->fecha_publicacion?->format('d/m/Y'),
                         'categorias' => $actividad->categorias->pluck('nombre')->toArray(),
                         'slug' => (string) $actividad->id,
+                        'me_gusta_count' => $actividad->me_gusta_count,
+                        'le_gusta' => (bool) $actividad->le_gusta,
                     ];
                 })->toArray(),
                 'pagination' => [
@@ -66,7 +70,7 @@ class ActividadController extends Controller
      * GET /actividades/{id}
      * Detalle de una actividad
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $actividad = Actividad::with([
             'categorias',
@@ -80,7 +84,7 @@ class ActividadController extends Controller
             'publicador',
             'estado',
             'visibilidad',
-        ])->publicadas()->activas()->find($id);
+        ])->conMeGusta(Visitante::huella($request))->publicadas()->activas()->find($id);
 
         if (! $actividad) {
             abort(404, 'Actividad no encontrada');
@@ -96,6 +100,8 @@ class ActividadController extends Controller
                 'imagen' => Archivo::url($actividad->imagen),
                 'fecha_publicacion' => $actividad->fecha_publicacion?->format('d/m/Y'),
                 'fecha_evento' => $actividad->fecha_evento?->format('d/m/Y'),
+                'me_gusta_count' => $actividad->me_gusta_count,
+                'le_gusta' => (bool) $actividad->le_gusta,
                 'autor_visible' => $actividad->autor_visible ?? $actividad->publicador?->name,
                 'categorias' => $actividad->categorias->map(function ($cat) {
                     return ['id' => $cat->id, 'nombre' => $cat->nombre];
@@ -116,6 +122,7 @@ class ActividadController extends Controller
                         'tipo' => $archivo->tipo,
                     ];
                 })->toArray(),
+                'comentarios' => $actividad->comentariosPublicos(),
             ],
         ]);
     }

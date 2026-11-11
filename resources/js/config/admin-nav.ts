@@ -3,14 +3,12 @@ import {
     Building2,
     CalendarDays,
     FileStack,
-    FileText,
     Globe2,
-    Handshake,
     Image,
     Inbox,
     Menu,
     LayoutGrid,
-    Mail,
+    MessageSquareText,
     Newspaper,
     Network,
     ScrollText,
@@ -25,6 +23,8 @@ import { dashboard } from '@/routes/admin';
 import { index as actividades } from '@/routes/admin/actividades';
 import { edit as ajustes } from '@/routes/admin/ajustes';
 import { index as bolsaTrabajo } from '@/routes/admin/bolsa-trabajo';
+import { index as comentarios } from '@/routes/admin/comentarios';
+import { index as contenidoInstitucional } from '@/routes/admin/contenido-institucional';
 import { index as directivos } from '@/routes/admin/directivos';
 import { index as fichasPais } from '@/routes/admin/fichas-pais';
 import { index as medios } from '@/routes/admin/medios';
@@ -109,8 +109,9 @@ export const adminNav: AdminNavGrupo[] = [
             },
             {
                 titulo: 'Contenido institucional',
+                href: contenidoInstitucional().url,
                 icono: ScrollText,
-                busqueda: 'historia misión visión estatutos',
+                busqueda: 'la cámara nosotros misión visión estatutos pdf',
             },
             {
                 titulo: 'Directivos',
@@ -142,11 +143,11 @@ export const adminNav: AdminNavGrupo[] = [
                 icono: Inbox,
                 busqueda: 'altas pendientes',
             },
-            { titulo: 'Mensajes de contacto', icono: Mail },
             {
-                titulo: 'Suscriptores',
-                icono: Users,
-                busqueda: 'boletín newsletter',
+                titulo: 'Comentarios',
+                href: comentarios().url,
+                icono: MessageSquareText,
+                busqueda: 'moderar aprobar noticias actividades',
             },
         ],
     },
@@ -166,7 +167,6 @@ export const adminNav: AdminNavGrupo[] = [
                 icono: Network,
                 busqueda: 'cámaras de comercio internacionales',
             },
-            { titulo: 'Patrocinadores', icono: Handshake },
             {
                 titulo: 'Biblioteca de medios',
                 href: medios().url,
@@ -191,12 +191,6 @@ export const adminNav: AdminNavGrupo[] = [
                 icono: ShieldCheck,
                 soloAdmin: true,
                 busqueda: 'permisos accesos',
-            },
-            {
-                titulo: 'Auditoría',
-                icono: FileText,
-                soloAdmin: true,
-                busqueda: 'registro cambios historial',
             },
             {
                 titulo: 'Ajustes del sitio',

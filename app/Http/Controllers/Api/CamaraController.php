@@ -8,6 +8,7 @@ use App\Concerns\DecoraConBloques;
 use App\Http\Controllers\Controller;
 use App\Models\ContenidoInstitucional;
 use App\Models\Directivo;
+use App\Support\Archivo;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -92,13 +93,10 @@ class CamaraController extends Controller
             'titulo' => $seccion->titulo,
             'contenido' => $seccion->contenido,
 
-            'imagen' => $seccion->imagen
-                ? asset('storage/'.$seccion->imagen)
-                : null,
-
-            'pdf_url' => $seccion->pdf
-                ? asset('storage/'.$seccion->pdf)
-                : null,
+            // Vienen de la biblioteca de medios (URL completa) o del backup
+            // (ruta del disco): Archivo::url resuelve las dos.
+            'imagen' => Archivo::url($seccion->imagen),
+            'pdf_url' => Archivo::url($seccion->pdf),
 
             'orden' => $seccion->orden,
         ];

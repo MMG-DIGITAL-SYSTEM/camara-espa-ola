@@ -4,12 +4,14 @@
 
 namespace App\Models;
 
+use App\Concerns\RecibeComentarios;
+use App\Concerns\RecibeMeGusta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Actividad extends Model
 {
-    use SoftDeletes;
+    use RecibeComentarios, RecibeMeGusta, SoftDeletes;
 
     protected $table = 'actividades';
 

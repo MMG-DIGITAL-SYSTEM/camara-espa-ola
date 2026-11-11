@@ -64,9 +64,12 @@ function medidas(proporcion: number): { ancho: number; doble: boolean } {
 export function LectorLibro({
     ficha,
     onCerrar,
+    etiqueta = `Ficha país · ${ficha.pais}`,
 }: {
     ficha: FichaLibro;
     onCerrar: () => void;
+    /** Antetítulo de la cabecera del lector. */
+    etiqueta?: string;
 }) {
     const anfitrion = useRef<HTMLDivElement>(null);
     const pageFlip = useRef<PageFlip | null>(null);
@@ -300,7 +303,7 @@ export function LectorLibro({
             <header className="flex items-center gap-4 px-4 py-3 md:px-8">
                 <div className="min-w-0 flex-1">
                     <p className="text-xs font-semibold tracking-[0.2em] text-red-400 uppercase">
-                        Ficha país · {ficha.pais}
+                        {etiqueta}
                     </p>
                     <h2 className="truncate text-base font-semibold md:text-lg">
                         {ficha.titulo}

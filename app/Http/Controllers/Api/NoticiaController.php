@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Categoria;
 use App\Models\Noticia;
 use App\Support\Archivo;
+use App\Support\Visitante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
@@ -20,6 +21,7 @@ class NoticiaController extends Controller
             // El scope resuelve estado y visibilidad por nombre: con los ids
             // a pelo, cualquier retoque del catálogo dejaba la lista vacía.
             $query = Noticia::with(['categorias', 'estado', 'visibilidad'])
+                ->conMeGusta(Visitante::huella($request))
                 ->activas()
                 ->ordenadas();
 
@@ -76,6 +78,7 @@ class NoticiaController extends Controller
     {
         try {
             $noticia = Noticia::with(['categorias', 'estado', 'visibilidad', 'publicador'])
+                ->conMeGusta(Visitante::huella($request))
                 ->where('slug', $slug)
                 ->activas()
                 ->firstOrFail();
@@ -84,6 +87,8 @@ class NoticiaController extends Controller
                 return response()->json([
                     'success' => true,
                     'data' => $this->conImagenPublica($noticia),
+                    // Aparte de la noticia: en el modelo, `comentarios` es la relación.
+                    'comentarios' => $noticia->comentariosPublicos(),
                 ]);
             }
 

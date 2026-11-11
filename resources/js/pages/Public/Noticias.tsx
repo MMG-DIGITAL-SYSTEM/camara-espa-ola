@@ -1,14 +1,8 @@
 // resources/js/pages/Public/Noticias/index.tsx
 import { Link } from '@inertiajs/react';
-import {
-    Calendar,
-    ChevronRight,
-    Sparkles,
-    Eye,
-    Heart,
-    MessageCircle,
-} from 'lucide-react';
+import { Calendar, ChevronRight, Sparkles, Eye } from 'lucide-react';
 import { useCallback, useState, useEffect, useRef } from 'react';
+import { ContadorMeGusta } from '@/components/public/boton-me-gusta';
 import { ImagenSinRecorte } from '@/components/public/imagen-sin-recorte';
 import { SeccionesDelModulo } from '@/components/public/secciones-del-modulo';
 import PublicLayout from '@/layouts/PublicLayout';
@@ -34,6 +28,8 @@ interface Noticia {
     destacada: boolean;
     slug: string;
     categorias: Categoria[];
+    me_gusta_count: number;
+    le_gusta: boolean;
 }
 
 // ============================================
@@ -299,13 +295,10 @@ function NoticiaCard({ noticia, index }: { noticia: Noticia; index: number }) {
                             <ChevronRight className="ml-1 h-4 w-4" />
                         </div>
                         <div className="flex items-center gap-3 text-xs text-gray-400">
-                            <span className="flex items-center gap-1">
-                                <Heart className="h-3.5 w-3.5" />
-                                24
-                            </span>
-                            <span className="flex items-center gap-1">
-                                <MessageCircle className="h-3.5 w-3.5" />8
-                            </span>
+                            <ContadorMeGusta
+                                total={noticia.me_gusta_count}
+                                leGusta={noticia.le_gusta}
+                            />
                         </div>
                     </div>
                 </div>
